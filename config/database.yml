@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: reimbursement_management_system_development
+
+test:
+  <<: *default
+  database: reimbursement_management_system_test
+
+production:
+  <<: *default
+  database: reimbursement_management_system_production
+  username: reimbursement_management_system
+  password: <%= ENV["REIMBURSEMENT_MANAGEMENT_SYSTEM_DATABASE_PASSWORD"] %>
