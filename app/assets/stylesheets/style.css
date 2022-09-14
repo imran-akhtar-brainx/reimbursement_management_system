@@ -1,0 +1,8 @@
+.dropdown i{
+    font-size: 25px;
+    color: white;
+    margin-right: 20px;
+}
+.dropdown-toggle::after{
+    display: none !important;
+}
