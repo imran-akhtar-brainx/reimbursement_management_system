@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4">
+      <h1>logo</h1>
+    </div>
+    <div class="col-8">
+      <h1>Expense Claim Form</h1>
+    </div>
+  </div>
+
+  <table class="table table-bordered mt-4 form-table">
+    <%= form_with model: @form do |form| %>
+      <thead>
+      <tr>
+        <th class="col-lg-9" scope="col">Details/Particulars</th>
+        <th class="col-lg-3" scope="col">Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %>
+          </div>
+        </td>
+
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %> </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %>
+          </div>
+        </td>
+
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %> </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %>
+          </div>
+        </td>
+
+        <td>
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control border-0" %> </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        <%= form.submit "Submit" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -6,3 +6,14 @@
 .dropdown-toggle::after{
     display: none !important;
 }
+
+.form-input-field{
+    /*border: 1px solid;*/
+    border: none;
+}
+.form-input-field:focus{
+    outline: none;
+}
+.form-table{
+    border-radius: 100px;
+}
