@@ -14,6 +14,8 @@ class FormsController < ApplicationController
   end
 
   def create
+    debugger
+    @submission = Submission.new
     @form =  Form.new(_type: "..", data: {})
     if @form.save
       redirect_to @form

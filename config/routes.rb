@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :managers
   resources :accountants
   resources :forms
+  resources :submissions
 end
