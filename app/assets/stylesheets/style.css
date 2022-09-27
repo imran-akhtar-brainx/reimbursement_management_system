@@ -1,26 +1,30 @@
-.dropdown i{
+.dropdown i {
     font-size: 25px;
     color: white;
     margin-right: 20px;
 }
-.dropdown-toggle::after{
+
+.dropdown-toggle::after {
     display: none !important;
 }
 
-.form-input-field{
-    /*border: 1px solid;*/
+.form-input-field {
     border: none;
 }
-.form-input-field:focus{
+
+.form-input-field:focus {
     outline: none;
 }
-.form-table{
+
+.form-table {
     border-radius: 100px;
 }
-.user-data{
+
+.user-data {
     border-bottom: 1px solid;
     float: left;
 }
-.input-field-form{
-    
+
+.input-field-form {
+    border: none;
 }

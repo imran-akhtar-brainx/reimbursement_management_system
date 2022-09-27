@@ -6,11 +6,6 @@ class ApplicationController < ActionController::Base
     default_user_path(resource)
   end
 
-  # def after_sign_out_path_for(resource)
-  #   new_session_path(resource)
-  # end
-
-
   def default_user_path(resource)
     if resource.has_role?('project_manager')
       managers_path

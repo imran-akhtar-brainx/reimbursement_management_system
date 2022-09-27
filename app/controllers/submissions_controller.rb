@@ -4,6 +4,7 @@ class SubmissionsController < ApplicationController
   def index
 
   end
+
   def create
     # debugger
     @submission = current_user.submissions.new(form_id: params[:form_id], data: params[:data])

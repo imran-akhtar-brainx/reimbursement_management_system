@@ -1,6 +1,11 @@
 
 <div class="d-flex justify-content-center mt-5">
+  <%# debugger %>
   <h1>Welcome to Reimbursement Management System </h1>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <h1><%= current_user.roles.first._type.titleize %></h1>
 </div>
 
 <div class="d-flex justify-content-center mt-5" >
@@ -8,7 +13,7 @@
     <%#= image_tag @user.image if @user.image.attached? %>
     <h4 class="text-center">Previously Submitted Forms</h4>
     <div class="card-body">
-      <h4 class="card-title"><%= @user.name %></h4>
+      <h4 class="card-title"><%= current_user.name %></h4>
       <p class="card-text">Some example text some example text. John Doe is an architect and engineer
         Some example text some example text. John Doe is an architect and engineer</p>
 
@@ -23,7 +28,7 @@
     <%#= image_tag @user.image if @user.image.attached? %>
     <h4 class = "text-center">Apply For New Form</h4>
     <div class="card-body">
-      <h4 class="card-title"><%= @user.name %></h4>
+      <h4 class="card-title"><%= current_user.name %></h4>
       <p class="card-text">Some example text some example text. John Doe is an architect and engineer
         Some example text some example text. John Doe is an architect and engineer</p>
 
