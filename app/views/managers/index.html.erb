@@ -49,7 +49,7 @@
         Some example text some example text. John Doe is an architect and engineer</p>
 
       <div class = "btn btn-primary mr-3">
-        <%= link_to "Check Out New", forms_path, :class => "btn" %>
+        <%= link_to "Check Out New", manager_path(id: current_user.id), :class => "btn" %>
       </div>
     </div>
   </div>

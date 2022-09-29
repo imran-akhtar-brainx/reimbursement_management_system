@@ -57,6 +57,8 @@
       <div class="col-9">
         <span><%= current_user.manager.name %></span>
         <%= form.hidden_field :form_id, value: @form.id %>
+        <%= form.hidden_field :status, value: 'pending' %>
+        <%= form.hidden_field :approved_by, value: 'pending' %>
       </div>
     </div>
 
