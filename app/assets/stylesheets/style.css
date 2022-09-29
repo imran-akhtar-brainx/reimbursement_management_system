@@ -1,4 +1,4 @@
-.dropdown i {
+.dropdown .icon {
     font-size: 25px;
     color: white;
     margin-right: 20px;
@@ -8,9 +8,6 @@
     display: none !important;
 }
 
-.form-input-field {
-    border: none;
-}
 
 .form-input-field:focus {
     outline: none;
@@ -25,6 +22,7 @@
     float: left;
 }
 
-.input-field-form {
+.border-none {
     border: none;
+    width: 100%;
 }

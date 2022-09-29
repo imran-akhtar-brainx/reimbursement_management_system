@@ -55,7 +55,6 @@
         </div>
       </div>
     </div>
-<%# debugger %>
 
     <div class="row">
       <div class="col-3">
@@ -82,7 +81,7 @@
         <% @form.data.each do |key, value| %>
           <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
             <th scope="col">
-              <%= form.text_field "data[#{key}]", class: "form-input-field" %>
+              <%= form.text_field "data[#{key}]", class: "border-none"%>
           <% end %>
         <% end %>
       </tr>
