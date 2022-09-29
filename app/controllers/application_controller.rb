@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
-  # before_action :authenticate_user!
 
-  def after_sign_in_path_for(resource)
-    # debugger
-    default_user_path(resource)
+  before_action :authenticate_user!
+
+  def after_sign_in_path(resource)
+    default_path_for_user(resource)
   end
 
-  def default_user_path(resource)
+  def default_path_for_user(resource)
     if resource.has_role?('project_manager')
       managers_path
     elsif resource.has_role?('accountant')

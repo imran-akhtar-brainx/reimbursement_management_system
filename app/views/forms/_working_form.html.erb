@@ -48,14 +48,13 @@
         </div>
       </div>
     </div>
-<%# debugger %>
 
     <div class="row">
       <div class="col-3">
         <span>Reporting manager :</span>
       </div>
       <div class="col-9">
-        <span><%= current_user.manager.name %></span>
+        <span><%= current_user&.manager&.name %></span>
         <%= form.hidden_field :form_id, value: @form.id %>
       </div>
     </div>
@@ -75,7 +74,7 @@
         <% @form.data.each do |key, value| %>
           <% unless ["reporting_manager"].include? key %>
             <th scope="col">
-              <%= form.text_field "data[#{key}]", class: "form-input-field" %>
+              <%= form.text_field "data[#{key}]", class: "border-none" %>
           <% end %>
         <% end %>
       </tr>

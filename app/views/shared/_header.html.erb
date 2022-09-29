@@ -3,11 +3,11 @@
     <span class="navbar-toggler-icon">home_</span>
   </button>
   <div class="dropdown">
-    <i id="dropdownMenuButton1" class="dropdown-toggle fa-solid fa-bars" data-bs-toggle="dropdown" aria-expanded="false"></i>
+    <i id="dropdownMenuButton1" class="dropdown-toggle fa-solid fa-bars icon" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <li>
         <div class="dropdown-item">
-          <%= link_to "Home", edit_user_registration_path, :class => "btn" %>
+          <%= link_to "Home", root_path, :class => "btn" %>
         </div>
       </li>
       <% if user_signed_in? %>
