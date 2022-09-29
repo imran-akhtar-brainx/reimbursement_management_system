@@ -11,4 +11,9 @@ class User < ApplicationRecord
   def has_role?(role)
     roles.pluck(:_type).include?(role)
   end
+
+  def role
+     roles&.first&._type.titleize
+  end
+
 end
