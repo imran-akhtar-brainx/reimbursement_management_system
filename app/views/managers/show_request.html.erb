@@ -1,6 +1,5 @@
 <% @submissions.each do |submission| %>
   <div class="container">
-    <%# debugger %>
     <% unless ["approved", "not approved", "reject"].include? submission[:status] %>
       <div class="row mt-3">
         <div class="col-1">

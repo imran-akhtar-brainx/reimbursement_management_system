@@ -5,7 +5,6 @@ class SubmissionsController < ApplicationController
   end
   def create
     @submission = current_user.submissions.new(form_id: params[:form_id], data: params[:data])
-    # debugger
     if @submission.save
       redirect_to employees_path
     else

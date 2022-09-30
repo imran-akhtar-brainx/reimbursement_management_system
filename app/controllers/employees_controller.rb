@@ -4,6 +4,14 @@ class EmployeesController < ApplicationController
   def index
   end
 
+  def submitted_forms
+    @submissions = current_user.submissions
+  end
+
+  def show
+    @submissions = current_user.submissions.where(form_id: params[:form_id])
+  end
+
   private
 
   def check_employee

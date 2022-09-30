@@ -1,0 +1,23 @@
+<div class="container">
+  <table class="table table-bordered mt-4 form-table">
+    <thead>
+    <tr>
+      <% @submissions.first.data.keys.each do |key| %>
+        <th scope="col"> <%= key.titleize%> </th>
+      <% end %>
+      <th scope="col"> Status </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <% submission.data.each do |key, value| %>
+          <th scope="col"> <%= value %> </th>
+        <% end %>
+        <th scope="col"> <%= submission.status %> </th>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

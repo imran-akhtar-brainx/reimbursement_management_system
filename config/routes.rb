@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
   root to: "employees#index"
   devise_for :users
-  resources :employees
+  resources :employees do
+    collection do
+      get 'submitted_forms'
+    end
+  end
   resources :managers do
     member do
       get 'show_request'
-    end
-    member do
       post 'set_status'
+    end
+    collection do
+      get 'submitted_forms'
+      get 'my_submitted_forms'
     end
   end
   resources :accountants

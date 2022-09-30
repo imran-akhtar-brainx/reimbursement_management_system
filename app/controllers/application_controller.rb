@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_user_role
 
   def after_sign_in_path(resource)
     default_path_for_user(resource)
@@ -13,6 +13,19 @@ class ApplicationController < ActionController::Base
       accountants_path
     else
       employees_path
+    end
+  end
+
+  def set_user_role
+    if current_user.present?
+      role = current_user.role
+      @active_role = if role == 'Project Manager'
+                       'managers'
+                     elsif role == 'accountant'
+                       'accountants'
+                     else
+                       'employees'
+                     end
     end
   end
 

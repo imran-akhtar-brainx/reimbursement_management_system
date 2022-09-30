@@ -1,25 +1,24 @@
 <div class="card text-center mx-5" style="width:400px">
-  <h4 class="text-center">Previously Submitted Forms</h4>
+  <h4 class="text-center mt-4">Previously Submitted Forms</h4>
   <div class="card-body">
     <h4 class="card-title"><%= current_user.name %></h4>
-    <p class="card-text">Some example text some example text. John Doe is an architect and engineer
-      Some example text some example text. John Doe is an architect and engineer</p>
-
+    <p class="card-text">Forms that you have submitted previously. You can check the status of your submitted form</p>
     <div class="btn btn-primary mr-3">
+      <%= link_to "Submitted Forms", "/#{@active_role}/submitted_forms", class: "btn btn-primary" %>
     </div>
   </div>
 </div>
+
 
 
 <div class="card text-center mx-5" style="width:400px">,
   <h4 class="text-center">Apply For New Form</h4>
   <div class="card-body">
     <h4 class="card-title"><%= current_user.name %></h4>
-    <p class="card-text">Some example text some example text. John Doe is an architect and engineer
-      Some example text some example text. John Doe is an architect and engineer</p>
+    <p class="card-text">There are three type of forms i.e medical, working and expense for.</p>
 
     <div class="btn btn-primary mr-3">
-      <%= link_to "Check Out New", forms_path, :class => "btn" %>
+      <%= link_to "Check Out New", forms_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>
