@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resources :managers do
     member do
       get 'show_request'
-      post 'set_status'
     end
     collection do
+      post 'set_status'
       get 'submitted_forms'
       get 'my_submitted_forms'
     end

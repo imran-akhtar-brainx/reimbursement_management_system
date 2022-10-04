@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def role
-     roles&.first&._type.titleize
+     roles&.first&._type
   end
 
 end

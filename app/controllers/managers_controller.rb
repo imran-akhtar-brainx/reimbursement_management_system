@@ -14,15 +14,18 @@ class ManagersController < ApplicationController
 
   def show_request
     @submissions = User.find(params[:user_id]).submissions.joins(:form).where(form: {_type: "working"})
+    # user = User.find(params[:user_id])
+    # @submissions = users.forms.where(_type: "working")
   end
 
   def submitted_forms
     @submissions = current_user.submissions
   end
+
   def set_status
     submission = Submission.find(params[:submission])
     submission.update(status: params[:status] )
-    redirect_to action: show_request
+    redirect_to show_request_manager_path
   end
 
   def check_manager
