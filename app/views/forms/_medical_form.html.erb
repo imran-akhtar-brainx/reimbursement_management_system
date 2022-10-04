@@ -80,7 +80,7 @@
       <tr>
         <% @form.data.each do |key, value| %>
           <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
-            <th scope="col">
+            <td>
               <%= form.text_field "data[#{key}]", class: "border-none"%>
           <% end %>
         <% end %>

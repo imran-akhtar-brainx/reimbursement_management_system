@@ -12,9 +12,9 @@
   <% @submissions.each do |submission| %>
     <tr>
       <% submission.data.each do |key, value| %>
-        <th scope="col"> <%= value %> </th>
+        <td> <%= value %> </td>
       <% end %>
-      <th scope="col"> <%= submission.status %> </th>
+      <td> <%= submission.status %> </td>
     </tr>
   <% end %>
   </tbody>

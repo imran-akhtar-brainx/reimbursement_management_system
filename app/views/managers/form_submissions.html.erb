@@ -2,7 +2,7 @@
   <table class="table table-bordered mt-4 form-table">
     <thead>
     <tr>
-      <% Form.find(params[:form_id]).data.keys.each do |key| %>
+      <% @submissions.first.data.keys.each do |key| %>
         <th scope="col"> <%= key.titleize%> </th>
       <% end %>
       <th scope="col"> Status </th>
@@ -10,11 +10,9 @@
     </thead>
     <tbody>
     <% @submissions.each do |submission| %>
-      <%# debugger %>
       <tr>
-        <td> <%= submission.approved_by.present? %> </td>
         <% submission.data.each do |key, value| %>
-          <td > <%= value %> </td>
+          <td> <%= value %> </td>
         <% end %>
         <td> <%= submission.status %> </td>
       </tr>
@@ -22,4 +20,3 @@
     </tbody>
   </table>
 </div>
-

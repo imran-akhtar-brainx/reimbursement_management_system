@@ -4,16 +4,18 @@ Rails.application.routes.draw do
   resources :employees do
     collection do
       get 'submitted_forms'
+      get 'form_submissions'
     end
   end
   resources :managers do
     member do
       get 'show_request'
+      post 'set_status'
     end
     collection do
-      post 'set_status'
       get 'submitted_forms'
-      get 'my_submitted_forms'
+      get 'form_submissions'
+      get 'employees_request'
     end
   end
   resources :accountants

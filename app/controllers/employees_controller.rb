@@ -5,10 +5,13 @@ class EmployeesController < ApplicationController
   end
 
   def submitted_forms
-    @submissions = current_user.submissions
+    @forms = Form.all
   end
 
   def show
+    # @submissions = current_user.submissions.where(form_id: params[:form_id])
+  end
+  def form_submissions
     @submissions = current_user.submissions.where(form_id: params[:form_id])
   end
 
