@@ -1,10 +1,10 @@
 <div class="container mt-5">
   <%= form_with url: submissions_path, method: :post do |form| %>
     <div class="row">
-      <div class="col-4">
-        <h1>logo</h1>
+      <div class="col-2">
+        <%= image_tag "site-logo.png"%>
       </div>
-      <div class="col-8">
+      <div class="col-10 d-flex align-items-center justify-content-start">
         <h1>EMPLOYEE WORKING HOLIDAYS FORM</h1>
       </div>
     </div>
@@ -43,7 +43,7 @@
             <span>Job Title :</span>
           </div>
           <div class="col-8">
-            <span class="form-header"><%= current_user.role %></span>
+            <span class="form-header"><%= current_user.role.titleize %></span>
           </div>
         </div>
       </div>
@@ -57,7 +57,6 @@
         <span><%= current_user&.manager&.name %></span>
         <%= form.hidden_field :form_id, value: @form.id %>
         <%= form.hidden_field :status, value: 'pending' %>
-        <%= form.hidden_field :approved_by, value: 'pending' %>
       </div>
     </div>
 
@@ -66,7 +65,7 @@
       <tr>
         <% @form.data.keys.each do |key| %>
           <% unless ["reporting_manager"].include? key %>
-            <th scope="col"> <%= key %> </th>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
       </tr>

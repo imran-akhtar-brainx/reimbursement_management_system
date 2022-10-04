@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
   def set_user_role
     if current_user.present?
       role = current_user.role
-      @active_role = if role == 'Project Manager'
+      @active_role = if role == 'project_manager'
                        'managers'
-                     elsif role == 'accountant'
+                     elsif role == 'Accountant'
                        'accountants'
                      else
                        'employees'

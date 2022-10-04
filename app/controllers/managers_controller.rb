@@ -19,6 +19,7 @@ class ManagersController < ApplicationController
   def submitted_forms
     @submissions = current_user.submissions
   end
+
   def set_status
     submission = Submission.find(params[:submission])
     submission.update(status: params[:status] )

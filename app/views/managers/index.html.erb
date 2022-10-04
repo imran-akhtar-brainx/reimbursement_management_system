@@ -4,7 +4,7 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-  <h1><%= current_user.role %></h1>
+  <h1><%= current_user&.role %></h1>
 </div>
 
 <div class="d-flex justify-content-center mt-5">
@@ -12,7 +12,7 @@
   <div class="card text-center mx-5" style="width:400px">
     <h4 class="text-center mt-4">Requests For Approval</h4>
     <div class="card-body">
-      <h4 class="card-title"><%= current_user.name %></h4>
+      <h4 class="card-title"><%= current_user&.name %></h4>
       <p class="card-text">Employees that request you for approval of their forms. You can can approve or reject their forms</p>
       <div class = "btn btn-primary mr-3">
         <%= link_to "Check Out New", manager_path(id: current_user.id), :class => "btn btn-primary" %>

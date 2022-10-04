@@ -16,7 +16,15 @@ Rails.application.routes.draw do
       get 'my_submitted_forms'
     end
   end
-  resources :accountants
+  resources :accountants do
+    collection do
+      get 'submitted_forms'
+      get 'my_submitted_forms'
+      get 'applicants'
+      get 'user_submissions'
+      get 'excel_generator'
+    end
+  end
   resources :forms
   resources :submissions
 end

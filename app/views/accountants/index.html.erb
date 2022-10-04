@@ -1,1 +1,38 @@
-<h1>Accounts Portal</h1>
+<!--<h1>Accounts Portal</h1>-->
+<%# @users.each do |user| %>
+<!--  <div>-->
+    <%#= user.name %>
+<!--    <div>-->
+      <%# user.submissions.each do |submission| %>
+<!--        <div>-->
+          <%# if submission.status == "approved" %>
+          <%#= submission.data %>
+          <%#= submission.status %>
+            <%# end %>
+<!--        </div>-->
+      <%# end %>
+<!--    </div>-->
+<!--  </div>-->
+<%# end %>
+
+<div class="d-flex justify-content-center mt-5">
+  <h1>Welcome to Reimbursement Management System </h1>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <h1><%= current_user.role.titleize %></h1>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <%= render "shared/dashboard" %>
+  <div class="card text-center mx-5" style="width:400px">
+    <h4 class="text-center mt-4">Applicants</h4>
+    <div class="card-body">
+      <h4 class="card-title"><%= current_user.name %></h4>
+      <p class="card-text">Employees that submitted forms.  You can check three types of forms </p>
+      <div class = "btn btn-primary mr-3">
+        <%= link_to "Check Out", applicants_accountants_path(id: current_user.id), :class => "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

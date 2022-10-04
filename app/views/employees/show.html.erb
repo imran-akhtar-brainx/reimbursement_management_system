@@ -2,17 +2,51 @@
   <table class="table table-bordered mt-4 form-table">
     <thead>
     <tr>
-      <% @submissions.first.data.keys.each do |key| %>
-        <th scope="col"> <%= key.titleize%> </th>
+      <% if params[:_type] == "working" %>
+        <th scope="col" class="bg-secondary">Reporting Manager</th>
       <% end %>
-      <th scope="col"> Status </th>
+      <% @submissions.first&.data&.keys.each do |key| %>
+        <%# debugger %>
+        <% if params[:_type] == "working" %>
+          <% unless ["total", "amount_in_words", "text", "signature"].include? key %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% elsif params[:_type] == "expense" %>
+          <% unless ["total", "amount_in_words", "text", "signature"].include? key %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% else %>
+          <% unless ["total", "amount_in_words", "text", "signature", "date"].include? key %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% end %>
+      <% end %>
+      <th scope="col" class="bg-secondary"> Status</th>
     </tr>
     </thead>
     <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <% submission.data.each do |key, value| %>
-          <th scope="col"> <%= value %> </th>
+        <% if params[:_type] == "working" %>
+          <th scope="col"> <%= submission.approved_by %> </th>
+        <% end %>
+        <% submission.data&.each do |key, value| %>
+          <% if params[:_type] == "working" %>
+            <% unless ["total", "amount_in_words", "text", "signature"].include? key %>
+              <th scope="col"> <%= value %> </th>
+            <% end %>
+          <% elsif params[:_type] == "expense" %>
+            <% unless ["total", "amount_in_words", "text", "signature"].include? key %>
+              <th scope="col"> <%= value %> </th>
+            <% end %>
+          <% else %>
+            <% unless ["total", "amount_in_words", "text", "signature", "date"].include? key %>
+              <th scope="col"> <%= value %> </th>
+            <% end %>
+          <% end %>
+          <%# end %>
+
+
         <% end %>
         <th scope="col"> <%= submission.status %> </th>
       </tr>

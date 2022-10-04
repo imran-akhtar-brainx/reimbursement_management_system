@@ -1,19 +1,27 @@
 <div class="container">
-  <% @users.each do |user| %>
-    <div class="row d-flex mt-3">
-      <div class="col-4">
-        <%= user.name %>
-      </div>
-
-      <div class="col-4">
-        <%= user.submissions.count %>
-      </div>
-
-      <div class="col-4">
-        <button class="btn btn-primary">
-        <%= link_to "Check Out", show_request_manager_path(user_id: user.id), class: "btn" %>
+  <table class="table table-bordered mt-4 form-table">
+    <thead>
+    <tr>
+      <th scope="col" class="bg-secondary"> Employee ID </th>
+      <th scope="col" class="bg-secondary"> Employee Name </th>
+      <th scope="col" class="bg-secondary"> Number of request </th>
+      <th scope="col" class="bg-secondary"> View it </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <th scope="col"><%= user.id %></th>
+      <th scope="col"><%= user.name %></th>
+      <th scope="col"><%= user.submissions.where(form_id: 2, status: "pending" ).count %></th>
+      <th>
+        <button class="btn btn-primary float-end">
+          <%= link_to "Check Out", show_request_manager_path(user_id: user.id), class: "btn" %>
         </button>
-      </div>
-    </div>
-  <% end %>
+      </th>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
 </div>

@@ -11,3 +11,4 @@ Role.create(_type: :software_engineer , medical_allowance: 1500 , travel_allowan
 Form.create(_type: :"EMPLOYEE WORKING HOLIDAYS FORM", data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})
 
 Submission.create()
+Submission.where(form_id: 1).update(data: {"name_of_patient"=>"fsdf", "relationship_with_employee"=>"sdf", "description"=>"sdf", "expense_in_rs"=>"sdf"})

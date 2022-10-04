@@ -2,18 +2,36 @@
   <div class="container">
     <% unless ["approved", "not approved", "reject"].include? submission[:status] %>
       <div class="row mt-3">
-        <div class="col-1">
-          <%= submission.user_id %>
-        </div>
-        <div class="col-7">
-          <%= submission.data %>
+        <div class="col-8">
+          <%#= submission.data %>
+
+          <table class="table table-bordered mt-4 form-table">
+            <thead>
+            <tr>
+              <% submission.data&.keys.each do |key| %>
+                <th scope="col" class="bg-secondary"> <%= key.titleize%> </th>
+              <% end %>
+              <th scope="col" class="bg-secondary"> Status </th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% submission.data&.each do |key, value| %>
+                  <th scope="col"> <%= value %> </th>
+                <% end %>
+                <th scope="col"> <%= submission.status %> </th>
+              </tr>
+
+            </tbody>
+          </table>
+
         </div>
 
         <div class="col-2">
 
         </div>
 
-        <div class="col-2">
+        <div class="col-2 d-flex align-items-center justify-content-end">
           <div class="row">
             <div class="col-6 btn btn-primary btn-sm">
               <%= link_to "Approved", set_status_manager_path(current_user.id, { status: "approved", submission: submission }), data: { turbo_method: "post" }, class: "btn" %>

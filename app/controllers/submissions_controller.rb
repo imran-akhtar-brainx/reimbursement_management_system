@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
     @form = Form.find_by(_type: params[:_type])
   end
   def create
-    @submission = current_user.submissions.new(form_id: params[:form_id], data: params[:data])
+    @submission = current_user.submissions.new(form_id: params[:form_id], data: params[:data], approved_by: current_user&.manager&.name)
     if @submission.save
       redirect_to employees_path
     else
