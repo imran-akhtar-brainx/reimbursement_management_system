@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       role = current_user.role
       @active_role = if role == 'project_manager'
                        'managers'
-                     elsif role == 'Accountant'
+                     elsif role == 'accountant'
                        'accountants'
                      else
                        'employees'

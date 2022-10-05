@@ -19,8 +19,7 @@
     <% end %>
     </tbody>
   </table>
-
   <div>
-    <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: @user, _type: "expense", form_id: 3 ), class: "btn btn-primary" %>
+    <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id] ), class: "btn btn-primary" %>
   </div>
 </div>

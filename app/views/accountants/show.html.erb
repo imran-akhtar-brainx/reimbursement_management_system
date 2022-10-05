@@ -21,7 +21,6 @@
             content.</p>
           <%= link_to "Medical", user_submissions_accountants_path(user_id: @user, _type: "medical", form_id: 1 ), class: "btn btn-primary" %>
           <div class="d-flex align-items-center justify-content-center"><%=  User.find(params[:id]).submissions.where(form_id: 1).count %></div>
-          <%# debugger %>
         </div>
       </div>
 

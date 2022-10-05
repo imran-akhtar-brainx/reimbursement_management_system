@@ -6,7 +6,6 @@
         <th scope="col" class="bg-secondary">Reporting Manager</th>
       <% end %>
       <% @submissions.first&.data&.keys.each do |key| %>
-        <%# debugger %>
         <% if params[:_type] == "working" %>
           <% unless ["total", "amount_in_words", "text", "signature"].include? key %>
             <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>

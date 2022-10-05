@@ -3,7 +3,6 @@ class AccountantsController < ApplicationController
   before_action :check_accountant
 
   def index
-    # debugger
 
   end
 
@@ -12,7 +11,6 @@ class AccountantsController < ApplicationController
   end
 
   def show
-    # debugger
     @user = User.find(params[:id])
     @submissions = @user.submissions.where(form_id: params[:form_id])
   end
@@ -24,12 +22,12 @@ class AccountantsController < ApplicationController
 
   def user_submissions
     @user = User.find(params[:user_id])
+    @submissions = @user.submissions.where(form_id: params[:form_id])
     if params[:_type] == "working"
       @submissions = @user.submissions.where(form_id: 2, status: "approved")
     else
       @submissions = @user.submissions.where(form_id: params[:form_id])
     end
-
     respond_to do |format|
       format.html
       format.xlsx do
@@ -37,10 +35,6 @@ class AccountantsController < ApplicationController
         send_file(@xlsx_file.path)
       end
     end
-  end
-
-  def excel_generator
-
   end
 
 
@@ -60,10 +54,11 @@ class AccountantsController < ApplicationController
     workbook = WriteXLSX.new(file)
     # Add a worksheet
     worksheet = workbook.add_worksheet
+
     data = []
-    data << ["Project Name", "Details", "Amount", "Status"]
+    data << submissions.first.data.keys
     submissions.each do |submission|
-      data << [submission.data['project_name'], submission.data['details'], submission.data['amount'], submission.status]
+      data << submission.data.values
     end
     worksheet.write_col(0, 0, data)
     workbook.close
