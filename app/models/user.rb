@@ -16,4 +16,15 @@ class User < ApplicationRecord
      roles&.first&._type
   end
 
+  def total_generator(submissions)
+    sum = 0
+    submissions.each do |submission|
+      if submission.data['amount'].present?
+        sum+=(submission.data['amount'].to_i)
+      end
+      sum+=0
+    end
+    sum
+  end
+
 end

@@ -18,6 +18,7 @@ class AccountantsController < ApplicationController
   def applicants
     users_ids = Submission.pluck(:user_id).uniq
     @users = User.where(id: users_ids)
+
   end
 
   def user_submissions
