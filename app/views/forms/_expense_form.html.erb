@@ -1,0 +1,99 @@
+<div class="container mt-5">
+  <%= form_with url: submissions_path, method: :post do |form| %>
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>logo</span>
+          </div>
+          <div class="col-8">
+            <span>Expense Claim Form</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <h6>BrainX technologies</h6>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee Name:</span>
+          </div>
+          <div class="col-8">
+            <span><%= current_user.name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Job Title: </span>
+          </div>
+          <div class="col-8">
+            <span><%= current_user.role %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee ID :</span></div>
+          <div class="col-8 form-header">
+            <span><%= current_user.emp_id %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Department :</span>
+          </div>
+          <div class="col-8">
+            <span class="form-header"><%= current_user.department %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6">
+        <span>Project Name :</span>
+        <span class="form-header"><%= form.text_field "data[project_name]" %></span>
+        <%= form.hidden_field :form_id, value: @form.id %>
+      </div>
+      <div class="col-6">
+      </div>
+    </div>
+
+    <table class="table table-bordered mt-4 form-table">
+      <thead>
+      <tr>
+        <% @form.data.keys.each do |key| %>
+          <% unless ["project_name", "total", "amount_in_words"].include? key %>
+            <th scope="col"> <%= key %> </th>
+          <% end %>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <% @form.data.each do |key, value| %>
+          <% unless ["project_name", "total", "amount_in_words"].include? key %>
+            <th scope="col">
+              <%= form.text_field "data[#{key}]", class: "border-none" %>
+          <% end %>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <%= form.submit "Submit", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

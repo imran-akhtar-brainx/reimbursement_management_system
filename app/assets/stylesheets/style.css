@@ -1,8 +1,28 @@
-.dropdown i{
+.dropdown .icon {
     font-size: 25px;
     color: white;
     margin-right: 20px;
 }
-.dropdown-toggle::after{
+
+.dropdown-toggle::after {
     display: none !important;
+}
+
+
+.form-input-field:focus {
+    outline: none;
+}
+
+.form-table {
+    border-radius: 100px;
+}
+
+.user-data {
+    border-bottom: 1px solid;
+    float: left;
+}
+
+.border-none {
+    border: none;
+    width: 100%;
 }

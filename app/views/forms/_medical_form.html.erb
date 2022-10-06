@@ -1,0 +1,95 @@
+<div class="container">
+  <%= form_with url: submissions_path, method: :post do |form| %>
+    <div class="row d-flex justify-content-center">
+      logo
+    </div>
+    <div class="row">
+      <span class="d-flex justify-content-center">BrainX Technologies</span>
+    </div>
+
+    <div class="row">
+      <h2 class="d-flex justify-content-center">Medical Claim Reimbursement Form</h2>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee Name:</span>
+          </div>
+          <div class="col-8">
+            <span><%= current_user.name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Job Title: </span>
+          </div>
+          <div class="col-8">
+            <span><%= current_user.role%></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee ID :</span></div>
+          <div class="col-8 form-header">
+            <span><%= current_user.emp_id %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Name of Patient :</span>
+          </div>
+          <div class="col-8">
+            <span class="form-header"><%= form.text_field "data[name_of_patient]" %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span>Relationship with Employee :</span>
+      </div>
+      <div class="col-9">
+        <span><%= form.text_field "data[relationship_with_employee]" %></span>
+        <%= form.hidden_field :form_id, value: @form.id %>
+      </div>
+    </div>
+
+    <table class="table table-bordered mt-4 form-table">
+      <thead>
+      <tr>
+        <% @form.data.keys.each do |key| %>
+          <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
+            <th scope="col"> <%= key %> </th>
+          <% end %>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <% @form.data.each do |key, value| %>
+          <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
+            <th scope="col">
+              <%= form.text_field "data[#{key}]", class: "border-none"%>
+          <% end %>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <%= form.submit "Submit", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>
