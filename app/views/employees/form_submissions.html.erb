@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table table-bordered mt-4 form-table">
+    <thead>
+    <tr>
+      <% Form.find(params[:form_id]).data.keys.each do |key| %>
+        <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+      <% end %>
+      <th scope="col" class="bg-secondary"> Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <% if params[:_type] == "working" %>
+          <td> <%= submission.approved_by.present? %> </td>
+        <% end %>
+        <% submission.data.each do |key, value| %>
+          <td> <%= value %> </td>
+        <% end %>
+        <% if params[:_type] == "working" %>
+          <td> User Amount per day</td>
+        <% end %>
+        <td> <%= submission.status %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

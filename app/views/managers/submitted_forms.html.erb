@@ -1,38 +1,12 @@
-<div class="container mt-4">
-  <div class="row mt-5">
-    <div class="col-4">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Working</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-          <%= link_to "Working", my_submitted_forms_managers_path(current_user.id, { _type: "working", form_id: 2 }), class: "btn btn-primary" %>
-        </div>
+<div class="container mt-5 d-flex row-wrap align-item-center justify-content-center">
+  <% @forms.each do |form| %>
+    <div class="card mx-4" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= form._type.titleize %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+        <%= link_to "Check Out", form_submissions_managers_path({ _type: form._type, form_id: form.id }), class: "btn btn-primary" %>
       </div>
-
-
     </div>
-    <div class="col-4">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Medical</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-          <%= link_to "Medical", my_submitted_forms_managers_path(current_user.id, { _type: "medical", form_id: 1 }), class: "btn btn-primary" %>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-4">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Expense</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-          <%= link_to "Expense", my_submitted_forms_managers_path(current_user.id, { _type: "expense", form_id: 3 }), class: "btn btn-primary" %>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <% end %>
 </div>

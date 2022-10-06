@@ -2,7 +2,7 @@
   <%= form_with url: submissions_path, method: :post do |form| %>
     <div class="row">
       <div class="col-2">
-        <%= image_tag "site-logo.png"%>
+        <%= image_tag "site-logo.png" %>
       </div>
       <div class="col-10 d-flex align-items-center justify-content-start">
         <h1>EMPLOYEE WORKING HOLIDAYS FORM</h1>
@@ -63,9 +63,16 @@
     <table class="table table-bordered mt-4 form-table">
       <thead>
       <tr>
+        <%# debugger %>
         <% @form.data.keys.each do |key| %>
           <% unless ["reporting_manager"].include? key %>
-            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+            <% if @form.id == 2 %>
+              <% unless ["amount"].include? key %>
+                <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+              <% end %>
+            <% else %>
+              <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+            <% end %>
           <% end %>
         <% end %>
       </tr>
@@ -74,8 +81,15 @@
       <tr>
         <% @form.data.each do |key, value| %>
           <% unless ["reporting_manager"].include? key %>
-            <th scope="col">
-              <%= form.text_field "data[#{key}]", class: "border-none" %>
+            <% if @form.id == 2 %>
+              <% unless ["amount"].include? key %>
+                <td>
+                  <%= form.text_field "data[#{key}]", class: "border-none" %>
+              <% end %>
+            <% else %>
+              <td>
+                <%= form.text_field "data[#{key}]", class: "border-none" %>
+            <% end %>
           <% end %>
         <% end %>
       </tr>

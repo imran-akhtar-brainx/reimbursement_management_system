@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :employees do
     collection do
       get 'submitted_forms'
+      get 'form_submissions'
     end
   end
   resources :managers do
@@ -13,7 +14,8 @@ Rails.application.routes.draw do
     end
     collection do
       get 'submitted_forms'
-      get 'my_submitted_forms'
+      get 'form_submissions'
+      get 'employees_request'
     end
   end
   resources :accountants do
