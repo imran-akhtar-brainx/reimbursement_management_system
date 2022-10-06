@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   namespace :supervisor do
-      resources :submissions
-      resources :roles
-      resources :forms
+      # resources :submissions
+      # resources :roles
+      # resources :forms
       resources :users
 
-      root to: "submissions#index"
+      root to: "users#index"
     end
   namespace :admin do
       resources :submissions
