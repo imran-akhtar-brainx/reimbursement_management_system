@@ -9,42 +9,38 @@
             <thead>
             <tr>
               <% submission.data&.keys.each do |key| %>
-                <th scope="col" class="bg-secondary"> <%= key.titleize%> </th>
+                <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
               <% end %>
-              <th scope="col" class="bg-secondary"> Status </th>
+              <th scope="col" class="bg-secondary"> Status</th>
             </tr>
             </thead>
             <tbody>
-              <tr>
-                <% submission.data&.each do |key, value| %>
-                  <th scope="col"> <%= value %> </th>
-                <% end %>
-                <th scope="col"> <%= submission.status %> </th>
-              </tr>
+            <tr>
+              <% submission.data&.each do |key, value| %>
+                <th scope="col"> <%= value %> </th>
+              <% end %>
+              <th scope="col"> <%= submission.status %> </th>
+            </tr>
 
             </tbody>
           </table>
-
         </div>
-
         <div class="col-2">
 
         </div>
 
         <div class="col-2 d-flex align-items-center justify-content-end">
           <div class="row">
-            <div class="col-6 btn btn-primary btn-sm">
-              <%= link_to "Approved", set_status_manager_path(current_user.id, { status: "approved", submission: submission }), data: { turbo_method: "post" }, class: "btn" %>
+            <div class="col-6">
+              <%= link_to "Approve", set_status_manager_path(user_id: @user_id, status: "approved", submission: submission), data: { turbo_method: "post" }, class: "btn btn-primary" %>
             </div>
-            <div  class="col-6 btn btn-danger btn-sm">
-              <%= link_to "Reject", set_status_manager_path(current_user.id, { status: "reject", submission: submission }), data: { turbo_method: "post" }, class: "btn" %>
+            <div class="col-6">
+              <%= link_to "Reject", set_status_manager_path(user_id: @user_id, status: "rejected", submission: submission), data: { turbo_method: "post" }, class: "btn btn-danger" %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
-
-
   </div>
 
   </div>

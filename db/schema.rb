@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_061713) do
     t.json "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", default: "pending"
+    t.integer "status", default: 0
     t.string "approved_by"
     t.index ["form_id"], name: "index_submissions_on_form_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
