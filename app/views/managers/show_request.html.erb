@@ -32,10 +32,10 @@
         <div class="col-2 d-flex align-items-center justify-content-end">
           <div class="row">
             <div class="col-6">
-              <%= link_to "Approve", set_status_manager_path(user_id: @user_id, status: "approved", submission: submission), data: { turbo_method: "post" }, class: "btn btn-primary" %>
+              <%= link_to "Approve", set_status_manager_path(user_id: @user_id, status: "approved", submission_id: submission.id), data: { turbo_method: "post" }, class: "btn btn-primary" %>
             </div>
             <div class="col-6">
-              <%= link_to "Reject", set_status_manager_path(user_id: @user_id, status: "rejected", submission: submission), data: { turbo_method: "post" }, class: "btn btn-danger" %>
+              <%= link_to "Reject", set_status_manager_path(user_id: @user_id, status: "rejected", submission_id: submission.id), data: { turbo_method: "post" }, class: "btn btn-danger" %>
             </div>
           </div>
         </div>

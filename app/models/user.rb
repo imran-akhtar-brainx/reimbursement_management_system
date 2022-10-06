@@ -16,6 +16,11 @@ class User < ApplicationRecord
      roles&.first&._type
   end
 
+  def pending_submissions(user_id)
+    user = User.find(user_id)
+    user.submissions.where(form_id: 2, status: "pending")
+  end
+
   def total_generator(submissions)
     sum = 0
     submissions.each do |submission|

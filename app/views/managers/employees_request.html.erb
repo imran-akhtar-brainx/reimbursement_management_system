@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-4">
-        <%= user.submissions.count %>
+        <%= user.pending_submissions(user.id).count %>
       </div>
 
       <div class="col-4">

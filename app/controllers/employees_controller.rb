@@ -8,8 +8,6 @@ class EmployeesController < ApplicationController
     @forms = Form.all
   end
 
-  def show
-  end
 
   def form_submissions
     @submissions = current_user.submissions.where(form_id: params[:form_id])
