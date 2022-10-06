@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  namespace :supervisor do
+      resources :submissions
+      resources :roles
+      resources :forms
+      resources :users
+
+      root to: "submissions#index"
+    end
+  namespace :admin do
+      resources :submissions
+      resources :roles
+      resources :forms
+      resources :users
+
+      root to: "submissions#index"
+    end
   root to: "employees#index"
   devise_for :users
   resources :employees do
