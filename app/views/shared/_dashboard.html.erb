@@ -4,7 +4,8 @@
     <h4 class="card-title"><%= current_user.name %></h4>
     <p class="card-text">Forms that you have submitted previously. You can check the status of your submitted form</p>
     <div class="btn btn-primary mr-3">
-      <%= link_to "Submitted Forms", "/#{@active_role}/submitted_forms", class: "btn btn-primary" %>
+      <%#= link_to "Submitted Forms", "/#{@active_role}/submitted_forms", class: "btn btn-primary" %>
+      <%= link_to "Submitted Forms", submitted_forms_forms_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>

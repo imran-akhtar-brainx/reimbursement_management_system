@@ -16,7 +16,7 @@
         <td><%= user.total_generator(user.submissions) %></td>
         <td>
           <button class="btn btn-primary float-end">
-            <%= link_to "Check Out", accountant_path(id: user.id, format: :html), class: "btn btn-primary" %>
+            <%= link_to "Check Out", employee_submissions_accountants_path(id: user.id, format: :html), class: "btn btn-primary" %>
           </button>
         </td>
       </tr>

@@ -4,4 +4,9 @@ class FormsController < ApplicationController
     @forms = Form.all
   end
 
+
+  def submitted_forms
+    @forms = Form.all
+  end
+
 end

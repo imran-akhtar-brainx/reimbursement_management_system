@@ -31,18 +31,25 @@ Rails.application.routes.draw do
     collection do
       get 'submitted_forms'
       get 'form_submissions'
-      get 'employees_request'
+      get 'requested_employees'
     end
   end
   resources :accountants do
     collection do
-      get 'submitted_forms'
-      get 'my_submitted_forms'
+      get 'employee_submissions'
       get 'applicants'
       get 'user_submissions'
       get 'excel_generator'
     end
   end
-  resources :forms
-  resources :submissions
+  resources :forms do
+    collection do
+      get 'submitted_forms'
+    end
+  end
+  resources :submissions do
+    collection do
+      get 'employee_submissions'
+    end
+  end
 end

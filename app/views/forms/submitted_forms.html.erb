@@ -5,7 +5,7 @@
         <h5 class="card-title"><%= form._type.titleize %></h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
           content.</p>
-        <%= link_to "Check Out", form_submissions_managers_path({ _type: form._type, form_id: form.id }), class: "btn btn-primary" %>
+        <%= link_to "Check Out", employee_submissions_submissions_path(_type: form._type, form_id: form.id ), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

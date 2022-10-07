@@ -3,22 +3,21 @@ class AccountantsController < ApplicationController
   before_action :check_accountant
 
   def index
-
   end
 
-  def my_submitted_forms
-    @submissions = current_user.submissions.where(form_id: params[:form_id])
-  end
+  # def show
+  #   @user = User.find(params[:id])
+  #   @submissions = @user.submissions.where(form_id: params[:form_id])
+  # end
 
-  def show
+
+  def employee_submissions
     @user = User.find(params[:id])
     @submissions = @user.submissions.where(form_id: params[:form_id])
   end
 
   def applicants
-    users_ids = Submission.pluck(:user_id).uniq
-    @users = User.where(id: users_ids)
-
+    @users = User.all
   end
 
   def user_submissions
@@ -39,16 +38,15 @@ class AccountantsController < ApplicationController
   end
 
 
-
-  def submitted_forms
-    @submissions = current_user.submissions
-  end
-
   private
 
   def check_accountant
     redirect_to default_path_for_user(current_user) unless current_user.has_role?('accountant')
   end
+
+  # def specific_submissions
+  #   User.find(params[:id]).submissions.where(form_id: 3)
+  # end
 
   def generate_xlsx(submissions)
     file = Tempfile.new(%w[report .xlsx])

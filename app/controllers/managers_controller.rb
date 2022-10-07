@@ -4,22 +4,14 @@ class ManagersController < ApplicationController
   def index
   end
 
-  def employees_request
+  def requested_employees
     @users = User.where(manager_id: current_user.id)
-  end
-
-  def form_submissions
-    @submissions = current_user.submissions.where(form_id: params[:form_id])
   end
 
   def show_request
     user = User.find(params[:id])
     @submissions = user.pending_submissions(params[:id])
     @user_id = params[user.id]
-  end
-
-  def submitted_forms
-    @forms = Form.all
   end
 
   def set_status
