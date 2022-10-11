@@ -2,6 +2,7 @@ class ManagersController < ApplicationController
   before_action :check_manager
 
   def index
+    @submissions = current_user.submissions.where(form_id: 2)
   end
 
   def requested_employees

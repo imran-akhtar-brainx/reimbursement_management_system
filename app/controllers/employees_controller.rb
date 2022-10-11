@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :check_employee
 
   def index
-    @submissions = current_user.submissions
+    @submissions = current_user.submissions.where(form_id: 2)
   end
 
   private

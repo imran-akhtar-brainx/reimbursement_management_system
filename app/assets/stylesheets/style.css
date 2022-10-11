@@ -26,3 +26,27 @@
     border: none;
     width: 100%;
 }
+
+.body{
+    background-color: #F7F7F7;
+}
+
+.main-dashboard{
+    background-color: white;
+}
+.app-container{
+    margin-top: 150px;
+    background-color: white;
+    padding: 20px;
+}
+.dropdown-forms{
+    margin-right: 276px;
+    margin-top: 105px;
+}
+
+.header-requested-button{
+    margin-left: 680px;
+}
+.header-submission-button{
+    margin-left: 100px;
+}

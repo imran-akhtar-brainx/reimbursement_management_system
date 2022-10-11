@@ -21,3 +21,6 @@ Form.create(_type: :"expense", data: {project_name: "..", details: "..", amount:
 
 Submission.create()
 Submission.where(form_id: 1).update(data: {"name_of_patient"=>"fsdf", "relationship_with_employee"=>"sdf", "description"=>"sdf", "expense_in_rs"=>"sdf"})
+
+
+Submission.where(form_id: 2).update(data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})

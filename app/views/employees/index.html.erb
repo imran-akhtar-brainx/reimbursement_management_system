@@ -1,11 +1,49 @@
-<div class="d-flex justify-content-center mt-5">
-  <h1>Welcome to Reimbursement Management System </h1>
-</div>
+<div class="body">
 
-<div class="d-flex justify-content-center mt-5">
-  <h1><%= current_user.role.titleize %></h1>
-</div>
 
-<div class="d-flex justify-content-center mt-5">
-  <%= render "shared/dashboard" %>
+  <!--<div class="d-flex justify-content-center mt-5">-->
+  <%#= render "shared/dashboard" %>
+  <!--</div>-->
+
+  <div class="container main-dashboard">
+
+    <div class="d-flex justify-content-center mt-5">
+      <h1>Welcome to Reimbursement Management System </h1>
+    </div>
+    <div class="d-flex justify-content-center mt-5 ">
+      <h1><%= current_user.role.titleize %></h1>
+    </div>
+    <%= render 'shared/forms-header' %>
+    <table class="table mt-4 form-table">
+      <thead>
+      <tr>
+        <% Form.find_by(_type: "working").data.keys.each do |key| %>
+          <% if key != "amount" %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% end %>
+        <th scope="col" class="bg-secondary"> Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @submissions.each do |submission| %>
+        <tr>
+          <% if params[:_type] == "working" %>
+            <td> <%= submission.approved_by.present? %> </td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% submission.data.each do |key, value| %>
+            <td> <%= value %> </td>
+          <% end %>
+          <% if params[:_type] == "working" %>
+            <td> User Amount per day</td>
+          <% end %>
+          <td> <%= submission.status %> </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
 </div>

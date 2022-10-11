@@ -1,29 +1,36 @@
-<div class="container">
-  <table class="table table-bordered mt-4 form-table">
-    <thead>
-    <tr>
-      <% Form.find(params[:form_id]).data.keys.each do |key| %>
-        <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
-      <% end %>
-      <th scope="col" class="bg-secondary"> Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @submissions.each do |submission| %>
+<div class="body">
+  <div class="container app-container">
+    <h2 class="d-flex justify-content-center"><%= Form.find(params[:form_id])._type.titleize %></h2>
+    <%= render 'shared/forms-header' %>
+    <table class="table mt-4 form-table mt-5">
+      <thead>
       <tr>
-        <% if params[:_type] == "working" %>
-          <td> <%= submission.approved_by.present? %> </td>
+        <% Form.find(params[:form_id]).data.keys.each do |key| %>
+          <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
         <% end %>
-        <% submission.data.each do |key, value| %>
-          <td> <%= value %> </td>
-        <% end %>
-        <% if params[:_type] == "working" %>
-          <td> User Amount per day</td>
-        <% end %>
-        <td> <%= submission.status %> </td>
+        <th scope="col" class="bg-secondary"> Status</th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <% @submissions.each do |submission| %>
+        <tr>
+          <% if submission.form_id == 2 %>
+            <% if submission.approved_by.present? %>
+              <td> <%= submission.approved_by %> </td>
+              <% else %>
+                <td></td>
+            <% end %>
+          <% end %>
+          <% submission.data.each do |key, value| %>
+            <td> <%= value %> </td>
+          <% end %>
+          <% if submission.form_id == 2 %>
+            <td> User Amount per day</td>
+          <% end %>
+          <td> <%= submission.status %> </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-

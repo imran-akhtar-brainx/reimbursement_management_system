@@ -9,8 +9,20 @@
   </div>
 
 
+  <div>
     <% @submissions.each do |submission| %>
-     
+      <div class="row">
+        <% submission.data.keys.each do |key| %>
+          <%= key %>
+        <% end %>
+      </div>
+      <div class="row">
+        <% submission.data.values.each do |value| %>
+          <%= value %>
+        <% end %>
+      </div>
     <% end %>
+  </div>
+
 
 </div>

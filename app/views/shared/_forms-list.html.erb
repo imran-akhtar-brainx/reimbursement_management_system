@@ -1,0 +1,11 @@
+<div class="dropdown dropdown-forms">
+  <button class="btn btn-primary dropdown-toggle float-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Form Types
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><%= link_to "Working", new_submission_path(_type: "working") %></li>
+    <li><%= link_to "Medical", new_submission_path(_type: "medical") %></li>
+    <li><%= link_to "Expense", new_submission_path(_type: "expense") %></li>
+  </ul>
+  </li>
+</div>

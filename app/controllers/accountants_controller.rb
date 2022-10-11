@@ -3,6 +3,7 @@ class AccountantsController < ApplicationController
   before_action :check_accountant
 
   def index
+    @submissions = current_user.submissions.where(form_id: 2)
   end
 
   # def show
