@@ -3,18 +3,19 @@ class AccountantsController < ApplicationController
   before_action :check_accountant
 
   def index
-    @submissions = current_user.submissions.where(form_id: 2)
+    @user = current_user
+    @form = Form.find_by(_type: "working")
+    @submissions = @user.submissions.where(form_id: @form.id)
+
   end
 
-  # def show
-  #   @user = User.find(params[:id])
-  #   @submissions = @user.submissions.where(form_id: params[:form_id])
-  # end
-
+  def show
+  end
 
   def employee_submissions
     @user = User.find(params[:id])
-    @submissions = @user.submissions.where(form_id: params[:form_id])
+    @form = Form.find_by(_type: "working")
+    @submissions = @user.submissions.where(form_id: @form.id)
   end
 
   def applicants
@@ -23,16 +24,12 @@ class AccountantsController < ApplicationController
 
   def user_submissions
     @user = User.find(params[:user_id])
-    @submissions = @user.submissions.where(form_id: params[:form_id])
-    if params[:_type] == "working"
-      @submissions = @user.submissions.where(form_id: 2, status: "approved")
-    else
-      @submissions = @user.submissions.where(form_id: params[:form_id])
-    end
+    @submission = Submission.find(params[:submission_id])
+    @submission.data = @submission.data.except('name_of_patient', 'relationship_with_employee','reporting_manager','name_of_patient','relationship_with_employee','project_name')
     respond_to do |format|
       format.html
       format.xlsx do
-        @xlsx_file = generate_xlsx(@submissions)
+        @xlsx_file = generate_xlsx(@submission)
         send_file(@xlsx_file.path)
       end
     end
@@ -45,20 +42,14 @@ class AccountantsController < ApplicationController
     redirect_to default_path_for_user(current_user) unless current_user.has_role?('accountant')
   end
 
-  # def specific_submissions
-  #   User.find(params[:id]).submissions.where(form_id: 3)
-  # end
-
-  def generate_xlsx(submissions)
+  def generate_xlsx(submission)
     file = Tempfile.new(%w[report .xlsx])
     workbook = WriteXLSX.new(file)
-    # Add a worksheet
     worksheet = workbook.add_worksheet
-
     data = []
-    data << submissions.first.data.keys
-    submissions.each do |submission|
-      data << submission.data.values
+    data << submission.data.values.first.keys
+    submission.data.values.each do |row|
+      data << row.values
     end
     worksheet.write_col(0, 0, data)
     workbook.close

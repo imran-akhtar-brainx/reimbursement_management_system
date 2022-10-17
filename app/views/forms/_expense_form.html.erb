@@ -1,4 +1,5 @@
 <%= render "shared/forms-list" %>
+<% counter = 0 %>
 <div class="container mt-5">
   <%= form_with class:"app-container", url: submissions_path, method: :post do |form| %>
     <div class="row">
@@ -66,35 +67,42 @@
       <div class="col-6">
         <span>Project Name :</span>
         <span class="form-header"><%= form.text_field "data[project_name]" %></span>
-        <%= form.hidden_field :form_id, value: @form.id %>
+        <%= form.hidden_field :_type, value: @form._type %>
       </div>
       <div class="col-6">
       </div>
+    </div>
+
+    <div class="row">
+      <%= form.file_field :images, multiple: true %>
     </div>
 
     <table class="table table-bordered mt-4 form-table">
       <thead>
       <tr>
         <% @form.data.keys.each do |key| %>
-          <% unless ["project_name", "total", "amount_in_words"].include? key %>
+          <% unless ["project_name"].include? key %>
             <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
       </tr>
       </thead>
-      <tbody>
+      <tbody id="expense-table">
       <tr>
         <% @form.data.each do |key, value| %>
-          <% unless ["project_name", "total", "amount_in_words"].include? key %>
+          <% unless ["project_name"].include? key %>
             <td>
-              <%= form.text_field "data[#{key}]", class: "border-none" %>
+              <%= form.text_field "data[#{counter}][#{key}]", class: "border-none" %>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
     <div>
-      <%= form.submit "Submit", class: "btn-primary" %>
+      <%= form.submit "Submit", class: "btn btn-outline-primary" %>
     </div>
   <% end %>
+  <div class="d-flex justify-content-center" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
+    <button class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add Form Row</button>
+  </div>
 </div>

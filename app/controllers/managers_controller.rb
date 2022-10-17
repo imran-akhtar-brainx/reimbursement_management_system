@@ -2,7 +2,9 @@ class ManagersController < ApplicationController
   before_action :check_manager
 
   def index
-    @submissions = current_user.submissions.where(form_id: 2)
+    @user = current_user
+    @form = Form.find_by(_type: "working")
+    @submissions = @user.submissions.where(form_id: @form.id)
   end
 
   def requested_employees
@@ -10,15 +12,15 @@ class ManagersController < ApplicationController
   end
 
   def show_request
-    user = User.find(params[:id])
-    @submissions = user.pending_submissions(params[:id])
-    @user_id = params[user.id]
+    @user = User.find(params[:id])
+    @submissions = @user.pending_submissions(params[:id])
+    @form = Form.find_by(_type: "working")
   end
 
   def set_status
     submission = Submission.find(params[:submission_id])
     submission.update(status: params[:status])
-    redirect_to show_request_manager_path(id: params[:id])
+    redirect_to show_request_manager_path(id: params[:user_id])
   end
 
   def check_manager

@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-bordered mt-4 form-table">
+  <table class="table table-bordered table-hover mt-4 form-table">
     <thead>
     <tr>
       <% @submissions.first&.data&.keys.each do |key| %>
@@ -10,16 +10,17 @@
     </thead>
     <tbody>
     <% @submissions.each do |submission| %>
-      <tr>
-        <% submission.data&.each do |key, value| %>
-          <th scope="col"> <%= value %> </th>
-        <% end %>
-        <th scope="col"> <%= submission.status %> </th>
-      </tr>
+        <tr onclick="location.href='<%= submission_path(submission.id) %>'">
+          <% submission.data&.each do |key, value| %>
+            <td> <%= value %>
+          <% end %>
+          <td> <%= submission.status %>
+        </tr>
+      <%# end %>
     <% end %>
     </tbody>
   </table>
   <div>
-    <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id] ), class: "btn btn-primary" %>
+    <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id]), class: "btn btn-primary" %>
   </div>
 </div>

@@ -1,45 +1,21 @@
-<% @submissions.each do |submission| %>
-  <div class="container">
-    <% unless ["approved", "not approved", "reject"].include? submission[:status] %>
-      <div class="row mt-3">
-        <div class="col-8">
-          <table class="table table-bordered mt-4 form-table">
-            <thead>
-            <tr>
-              <% submission.data&.keys.each do |key| %>
-                <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
-              <% end %>
-              <th scope="col" class="bg-secondary"> Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <% submission.data&.each do |key, value| %>
-                <th scope="col"> <%= value %> </th>
-              <% end %>
-              <th scope="col"> <%= submission.status %> </th>
-            </tr>
-
-            </tbody>
-          </table>
-        </div>
-        <div class="col-2">
-
-        </div>
-
-        <div class="col-2 d-flex align-items-center justify-content-end">
-          <div class="row">
-            <div class="col-6">
-              <%= link_to "Approve", set_status_manager_path(user_id: @user_id, status: "approved", submission_id: submission.id), data: { turbo_method: "post" }, class: "btn btn-primary" %>
-            </div>
-            <div class="col-6">
-              <%= link_to "Reject", set_status_manager_path(user_id: @user_id, status: "rejected", submission_id: submission.id), data: { turbo_method: "post" }, class: "btn btn-danger" %>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="container app-container">
+  <h2 class="d-flex justify-content-center"><%= @form._type.titleize %></h2>
+  <table class="table mt-4 form-table table-hover mt-5">
+    <thead>
+    <tr>
+      <th scope="col" class="bg-secondary">Form Type</th>
+      <th scope="col" class="bg-secondary">Creation Date</th>
+      <th scope="col" class="bg-secondary">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @submissions.each do |submission| %>
+      <tr onclick="location.href='<%= submission_path(submission.id , user_id: @user.id) %>'">
+        <td><%= @form._type %></td>
+        <td><%= submission.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= submission.status %></td>
+      </tr>
     <% end %>
-  </div>
-
-  </div>
-<% end %>
+    </tbody>
+  </table>
+</div>

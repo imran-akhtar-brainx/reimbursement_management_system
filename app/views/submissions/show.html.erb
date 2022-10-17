@@ -1,0 +1,13 @@
+<%= render "shared/#{@form._type}_submission" %>
+<div class="container d-flex flex-wrap mt-5">
+  <% @submission.images.each do |image| %>
+    <div class="gallery">
+      <% if image.representable? %>
+        <%= link_to image, "data-toggle": "lightbox", "data-gallery": "example-gallery", class: "col-sm-4" do %>
+          <%= image_tag image, class: "h-100 w-100 modal-body" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,5 +1,5 @@
 <%= render "shared/forms-list" %>
-
+<% counter = 0 %>
 <div class="container mt-5">
   <%= form_with class:"app-container" , url: submissions_path, method: :post do |form| %>
     <div class="row">
@@ -57,9 +57,13 @@
       </div>
       <div class="col-9">
         <span><%= current_user&.manager&.name %></span>
-        <%= form.hidden_field :form_id, value: @form.id %>
+        <%= form.hidden_field :_type, value: @form._type %>
         <%= form.hidden_field :status, value: 'pending' %>
       </div>
+    </div>
+
+    <div class="row">
+      <%= form.file_field :images, multiple: true  %>
     </div>
 
     <table class="table table-bordered mt-4 form-table">
@@ -68,9 +72,7 @@
         <% @form.data.keys.each do |key| %>
           <% unless ["reporting_manager"].include? key %>
             <% if @form.id == 2 %>
-              <% unless ["amount"].include? key %>
                 <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
-              <% end %>
             <% else %>
               <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
             <% end %>
@@ -78,27 +80,22 @@
         <% end %>
       </tr>
       </thead>
-      <tbody>
+      <tbody id="working-table">
       <tr>
-        <% @form.data.each do |key, value| %>
+        <% @form.data.each do |key ,value| %>
           <% unless ["reporting_manager"].include? key %>
-            <% if @form.id == 2 %>
-              <% unless ["amount"].include? key %>
-                <td>
-                  <%= form.text_field "data[#{key}]", class: "border-none" %>
-              <% end %>
-            <% else %>
-              <td>
-                <%= form.text_field "data[#{key}]", class: "border-none" %>
-            <% end %>
+            <td>
+            <%= form.text_field "data[#{counter}][#{key}]", class: "border-none" %></td>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
-
     <div>
-      <%= form.submit "Submit", class: "btn-primary" %>
+      <%= form.submit "Submit", class: " btn btn-outline-primary" %>
     </div>
   <% end %>
+  <div class="d-flex justify-content-center" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
+    <button class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add Form Row</button>
+  </div>
 </div>

@@ -6,9 +6,9 @@
           Submitted Forms
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><%= link_to "Working", employee_submissions_submissions_path(form_id: 2) %></li>
-          <li><%= link_to "Medical", employee_submissions_submissions_path(form_id: 1) %></li>
-          <li><%= link_to "Expense", employee_submissions_submissions_path(form_id: 3) %></li>
+          <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working", user_id: @user.id) ,class:"dropdown-item" %></li>
+          <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical", user_id: @user.id) ,class:"dropdown-item" %></li>
+          <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense", user_id: @user.id) ,class:"dropdown-item"%></li>
         </ul>
       </div>
     </div>

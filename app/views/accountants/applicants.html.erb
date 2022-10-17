@@ -1,24 +1,18 @@
-<div class="container">
-  <table class="table table-bordered mt-4 form-table">
+<div class="container app-container">
+  <table class="table table-bordered table-hover mt-4 form-table">
     <thead>
     <tr>
       <th scope="col" class="bg-secondary"> Employee ID </th>
       <th scope="col" class="bg-secondary"> Employee Name </th>
       <th scope="col" class="bg-secondary">Total</th>
-      <th scope="col" class="bg-secondary"> View it </th>
     </tr>
     </thead>
     <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr onclick="location.href='<%= employee_submissions_accountants_path(id: user.id, format: :html) %>'">
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.total_generator(user.submissions) %></td>
-        <td>
-          <button class="btn btn-primary float-end">
-            <%= link_to "Check Out", employee_submissions_accountants_path(id: user.id, format: :html), class: "btn btn-primary" %>
-          </button>
-        </td>
       </tr>
     <% end %>
     </tbody>
