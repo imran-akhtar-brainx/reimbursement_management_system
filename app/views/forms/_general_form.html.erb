@@ -1,21 +1,21 @@
 <%= render "shared/forms-list" %>
 <% counter = 0 %>
 <div class="container mt-5">
-  <%= form_with class:"app-container" , url: submissions_path, method: :post do |form| %>
-    <div class="row">
-      <div class="col-3">
+  <%= form_with class: "app-container", url: submissions_path, method: :post do |form| %>
+    <div class="d-flex">
+      <div class="col-6">
+        <div class="d-flex">
+          <div class="col-4">
+            <%= image_tag "site-logo.png"%>
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <h3>General Form</h3>
+          </div>
+        </div>
       </div>
-      <div class="col-6 d-flex justify-content-center">
-        <%= image_tag "site-logo.png", class: "rounded float-start" %>
+      <div class="col-6 d-flex align-items-center justify-content-end mt-5">
+        <span>BrainX technologies</span>
       </div>
-      <div class="col-3"></div>
-    </div>
-    <div class="row mt-3">
-      <span class="d-flex justify-content-center">BrainX Technologies</span>
-    </div>
-
-    <div class="row mt-3">
-      <h2 class="d-flex justify-content-center">Medical Claim Reimbursement Form</h2>
     </div>
 
     <div class="d-flex mt-5">
@@ -54,43 +54,34 @@
       <div class="col-6">
         <div class="d-flex">
           <div class="col-4">
-            <span>Name of Patient :</span>
+            <span>Department :</span>
           </div>
           <div class="col-8">
-            <span class="form-header"><%= form.text_field "data[name_of_patient]", required: true %></span>
+            <span class="form-header"><%= current_user.department %></span>
+            <%= form.hidden_field :_type, value: @form._type %>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="d-flex">
-      <div class="col-3">
-        <span>Relationship with Employee :</span>
-      </div>
-      <div class="col-9">
-        <span><%= form.text_field "data[relationship_with_employee]", required: true %></span>
-        <%= form.hidden_field :_type, value: @form._type %>
-      </div>
-    </div>
-
-    <div class="d-flex">
-      <%= form.file_field :images, multiple: true  %>
+    <div class="d-flex mt-2">
+      <%= form.file_field :images, multiple: true %>
     </div>
 
     <table class="table table-bordered mt-4 form-table">
       <thead>
       <tr>
         <% @form.data.keys.each do |key| %>
-          <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
+          <% unless ["project_name"].include? key %>
             <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
       </tr>
       </thead>
-      <tbody id="medical-table">
+      <tbody id="general-table">
       <tr>
         <% @form.data.each do |key, value| %>
-          <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
+          <% unless ["project_name"].include? key %>
             <td>
               <% if key == "amount" %>
                 <%= form.text_field "data[#{counter}][#{key}]", class: "border-none",  type: "number", required: true%></td>
@@ -109,4 +100,4 @@
       <%= form.submit "Submit", class: "btn btn-outline-primary btn-lg" %>
     </div>
   <% end %>
-</div>`
+</div>

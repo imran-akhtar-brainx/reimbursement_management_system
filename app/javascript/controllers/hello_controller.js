@@ -6,6 +6,20 @@ export default class extends Controller {
 
     connect() {
         this.formList = [];
+        $('input[name="daterange"]').daterangepicker(
+            {
+
+                locale: {
+                    cancelLabel: 'Clear',
+                    format: 'YYYY-MM-DD'
+                },
+                startDate: '2022-10-01',
+                endDate: '2022-10-26'
+            },
+            function(start, end, label) {
+                alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+
     }
 
     greet() {
@@ -15,22 +29,24 @@ export default class extends Controller {
     }
 
     createElement() {
-        debugger
-        this.counterValue+=1
+        this.counterValue += 1
         console.log(this.typeValue)
         const element = document.createElement("tr");
         this.urlValue.forEach(key => {
-            if (key != "reporting_manager" && key != "project_name" && key != "relationship_with_employee" && key != "name_of_patient" && key!="signature") {
+            if (key != "reporting_manager" && key != "project_name" && key != "relationship_with_employee" && key != "name_of_patient" && key != "signature") {
                 const dt = document.createElement("td");
                 const field = document.createElement("input");
                 field.classList.add(["border-none"]);
-                field.setAttribute("id", "data"+`[${this.counterValue}]`+`[${key}]`)
-                field.setAttribute("name", "data"+`[${this.counterValue}]`+`[${key}]`)
+                field.setAttribute("id", "data" + `[${this.counterValue}]` + `[${key}]`)
+                field.setAttribute("name", "data" + `[${this.counterValue}]` + `[${key}]`)
+                field.setAttribute("required", true )
+                if (key == "amount"){
+                    field.setAttribute("type", "number")
+                }
                 dt.appendChild(field);
                 element.appendChild(dt);
             }
-            console.log(key)
         })
-        document.getElementById(`${this.typeValue}`+"-table").appendChild(element);
+        document.getElementById(`${this.typeValue}` + "-table").appendChild(element);
     }
 }

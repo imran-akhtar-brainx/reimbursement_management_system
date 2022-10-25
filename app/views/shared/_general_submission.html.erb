@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <%= image_tag "site-logo.png"%>
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <h3>General Form</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 d-flex align-items-center justify-content-end mt-5">
+        <span>BrainX technologies</span>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee Name:</span>
+          </div>
+          <div class="col-8">
+            <span><%= @user.name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Job Title: </span>
+          </div>
+          <div class="col-8">
+            <span><%= @user.role.titleize %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee ID :</span></div>
+          <div class="col-8 form-header">
+            <span><%= @user.emp_id %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Department :</span>
+          </div>
+          <div class="col-8">
+            <span class="form-header"><%= @user.department %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-bordered mt-4 form-table">
+      <thead>
+      <tr>
+        <% @form.data.keys.each do |key| %>
+          <% unless ["project_name"].include? key %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody id="general-table">
+        <% @submission.data.each do |keys, values| %>
+        <tr>
+          <% values.each do |key, value| %>
+            <td><%= value %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

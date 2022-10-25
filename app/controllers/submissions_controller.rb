@@ -1,10 +1,27 @@
 class SubmissionsController < ApplicationController
-
   #user for current user submission
   def employee_submissions
     @user = User.find(params[:user_id])
     @form = Form.find_by(_type: params[:_type])
     @submissions = @user.submissions.where(form_id: @form.id)
+  end
+
+  def filtered
+    # debugger
+    @user = User.find(params[:user_id])
+    @form = Form.find_by(_type: params[:_type])
+    if params[:date] == "today"
+      @submissions = @user.submissions.where(form_id: @form.id, created_at: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
+    elsif params[:date] == "week"
+      @submissions = @user.submissions.where(form_id: @form.id, created_at:  Time.zone.today.beginning_of_week..Time.zone.today.end_of_week)
+    elsif params[:date] == "month"
+      @submissions = @user.submissions.where(form_id: @form.id, created_at:  Time.zone.today.beginning_of_month..Time.zone.today.end_of_month)
+    else
+      range = params['daterange']
+      range = range.split(' - ', 2)
+      @submissions = @user.submissions.where(form_id: @form.id, created_at: Time.find_zone("UTC").parse(range[0])..Time.find_zone("UTC").parse(range[1]).end_of_day)
+    end
+    render 'submissions/employee_submissions'
   end
 
   def show
@@ -38,7 +55,11 @@ class SubmissionsController < ApplicationController
     if @submission.save
       redirect_to employees_path
     else
-      render :new, status: :unprocessable_entity
+      @form = Form.find_by(_type: params[:_type])
+      render "forms/_#{params[:_type]}_form", status: :unprocessable_entity
     end
   end
+
+  private
+
 end

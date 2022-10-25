@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def role
-     roles&.first&._type
+    roles&.first&._type
   end
 
   def pending_submissions(user_id)
@@ -24,10 +24,10 @@ class User < ApplicationRecord
   def total_generator(submissions)
     sum = 0
     submissions.each do |submission|
-      if submission.data['amount'].present?
-        sum+=(submission.data['amount'].to_i)
+      submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
+      submission.data.values.each do |key, value|
+        sum += (key['amount'].to_i)
       end
-      sum+=0
     end
     sum
   end

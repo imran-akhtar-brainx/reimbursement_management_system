@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :submissions do
     collection do
       get 'employee_submissions'
+      get 'filtered'
     end
   end
 end

@@ -1,5 +1,6 @@
 <div class="container app-container">
   <h2 class="d-flex justify-content-center"><%= @form._type.titleize %></h2>
+  <%= render "shared/filter" %>
   <%#= render 'shared/forms-header' %>
   <div class="row">
     <div class="dropdown">
@@ -10,6 +11,7 @@
         <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working", user_id: @user.id) ,class:"dropdown-item" %></li>
         <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical", user_id: @user.id) ,class:"dropdown-item" %></li>
         <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense", user_id: @user.id) ,class:"dropdown-item"%></li>
+        <li><%= link_to "General", employee_submissions_submissions_path(_type: "general", user_id: @user.id) ,class:"dropdown-item"%></li>
       </ul>
     </div>
   </div>

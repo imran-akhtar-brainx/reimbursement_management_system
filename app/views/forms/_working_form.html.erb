@@ -1,8 +1,8 @@
 <%= render "shared/forms-list" %>
 <% counter = 0 %>
 <div class="container mt-5">
-  <%= form_with class:"app-container" , url: submissions_path, method: :post do |form| %>
-    <div class="row">
+  <%= form_with class: "app-container", url: submissions_path, method: :post do |form| %>
+    <div class="d-flex">
       <div class="col-2">
         <%= image_tag "site-logo.png" %>
       </div>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="d-flex mt-5">
       <div class="col-3">
         <span>Employee Name :</span>
       </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="d-flex mt-3">
       <div class="col-3">
         <span>Employee ID :</span>
       </div>
@@ -29,9 +29,9 @@
       </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="d-flex mt-4">
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Department :</span></div>
           <div class="col-8 form-header">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Job Title :</span>
           </div>
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="d-flex">
       <div class="col-3">
         <span>Reporting manager :</span>
       </div>
@@ -62,8 +62,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <%= form.file_field :images, multiple: true  %>
+    <div class="d-flex">
+      <%= form.file_field :images, multiple: true %>
     </div>
 
     <table class="table table-bordered mt-4 form-table">
@@ -72,7 +72,7 @@
         <% @form.data.keys.each do |key| %>
           <% unless ["reporting_manager"].include? key %>
             <% if @form.id == 2 %>
-                <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+              <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
             <% else %>
               <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
             <% end %>
@@ -82,20 +82,26 @@
       </thead>
       <tbody id="working-table">
       <tr>
-        <% @form.data.each do |key ,value| %>
+        <% @form.data.each do |key, value| %>
           <% unless ["reporting_manager"].include? key %>
             <td>
-            <%= form.text_field "data[#{counter}][#{key}]", class: "border-none" %></td>
+              <% if key == "amount" %>
+                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "number", required: true %></td>
+              <% else %>
+                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", required: true %></td>
+              <% end %>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
-    <div>
-      <%= form.submit "Submit", class: " btn btn-outline-primary" %>
+    <div class="d-flex justify-content-end" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
+      <button type="button" class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add
+        Form Row
+      </button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= form.submit "Submit", class: " btn btn-outline-primary btn-lg" %>
     </div>
   <% end %>
-  <div class="d-flex justify-content-center" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
-    <button class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add Form Row</button>
-  </div>
 </div>

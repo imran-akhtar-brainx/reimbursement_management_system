@@ -1,11 +1,14 @@
-<div class="dropdown dropdown-forms">
-  <button class="btn btn-primary dropdown-toggle float-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Form Types
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><%= link_to "Working", new_submission_path(_type: "working") ,class:"dropdown-item"%></li>
-    <li><%= link_to "Medical", new_submission_path(_type: "medical") ,class:"dropdown-item"%></li>
-    <li><%= link_to "Expense", new_submission_path(_type: "expense") ,class:"dropdown-item"%></li>
-  </ul>
-  </li>
+<div class="container">
+  <div class="dropdown dropdown-forms">
+    <button class="btn btn-primary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Form Types
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><%= link_to "Working", new_submission_path(_type: "working"), class: "dropdown-item" %></li>
+      <li><%= link_to "Medical", new_submission_path(_type: "medical"), class: "dropdown-item" %></li>
+      <li><%= link_to "Expense", new_submission_path(_type: "expense"), class: "dropdown-item" %></li>
+      <li><%= link_to "General", new_submission_path(_type: "general"), class: "dropdown-item" %></li>
+    </ul>
+    </li>
+  </div>
 </div>

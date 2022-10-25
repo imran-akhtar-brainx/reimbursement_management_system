@@ -1,0 +1,2 @@
+class NewFormsController < ApplicationController
+end

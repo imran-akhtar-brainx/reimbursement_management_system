@@ -18,9 +18,10 @@ User.create(email: :"soban.akbar@gmail.com", password: :"qwerty", emp_id: :"0222
 Role.create(_type: :accountant , medical_allowance: 15000 , travel_allowance: 1000 , fitness_allowance: 32330, dinner_allowance: 3000)
 Form.create(_type: :"working", data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})
 Form.create(_type: :"expense", data: {project_name: "..", details: "..", amount: "..."})
+Form.create(_type: :"general", data: {description: "", amount: ""})
 
 Submission.create()
 Submission.where(form_id: 1).update(data: {"name_of_patient"=>"fsdf", "relationship_with_employee"=>"sdf", "description"=>"sdf", "expense_in_rs"=>"sdf"})
-
-
 Submission.where(form_id: 2).update(data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})
+Submission.where(created_at: Time.new(2022,10,15)..Time.new(2022,10,20))
+Submission.where(created_at: (Date.parse('2022-10-15')..Date.parse('2022-10-20')))

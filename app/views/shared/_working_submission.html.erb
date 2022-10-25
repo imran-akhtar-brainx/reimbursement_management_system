@@ -1,4 +1,10 @@
 <div class="container mt-5 app-container">
+  <% if @active_role == "managers" && @user.role != "project_manager" %>
+    <div class="d-flex justify-content-end">
+      <span class="mx-3"><%= link_to "Approve", set_status_manager_path(user_id: @user.id, status: "approved", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-primary" %></span>
+      <span><%= link_to "Reject", set_status_manager_path(user_id: @user.id, status: "rejected", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-danger" %></span>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-2">
       <%= image_tag "site-logo.png" %>
@@ -8,7 +14,7 @@
     </div>
   </div>
 
-  <div class="row mt-5">
+  <div class="d-flex mt-5">
     <div class="col-3">
       <span>Employee Name :</span>
     </div>
@@ -17,7 +23,7 @@
     </div>
   </div>
 
-  <div class="row mt-3">
+  <div class="d-flex mt-3">
     <div class="col-3">
       <span>Employee ID :</span>
     </div>
@@ -26,9 +32,9 @@
     </div>
   </div>
 
-  <div class="row mt-4">
+  <div class="d-flex mt-4">
     <div class="col-6">
-      <div class="row">
+      <div class="d-flex">
         <div class="col-4">
           <span>Department :</span></div>
         <div class="col-8 form-header">
@@ -37,7 +43,7 @@
       </div>
     </div>
     <div class="col-6">
-      <div class="row">
+      <div class="d-flex">
         <div class="col-4">
           <span>Job Title :</span>
         </div>
@@ -48,7 +54,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="d-flex">
     <div class="col-3">
       <span>Reporting manager :</span>
     </div>
@@ -78,14 +84,12 @@
     </tbody>
   </table>
 <%# debugger %>
-  <% if @active_role == "managers" && @user.role != "project_manager" %>
-    <div class="d-flex justify-content-center">
-      <span class="mx-3"><%= link_to "Approve", set_status_manager_path(user_id: @user.id, status: "approved", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-primary" %></span>
-      <span><%= link_to "Reject", set_status_manager_path(user_id: @user.id, status: "rejected", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-danger" %></span>
-    </div>
-  <% end %>
 
   <% if @active_role == "accountants" && @user.role != "accountant" %>
+    <div class="d-flex justify-content-end">
+      <h4> Total: <%= @user.total_generator([@submission])%></h4>
+    </div>
+
     <div class="d-flex justify-content-center">
       <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id], submission_id: @submission.id), class: "btn btn-primary" %>
     </div>
