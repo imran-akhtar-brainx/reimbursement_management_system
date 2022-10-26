@@ -5,7 +5,7 @@ class SubmissionsController < ApplicationController
     @submissions = @user.submissions.where(form_id: @form.id)
   end
 
-  #TODO: I will improve this function by removing the check statements 
+  #TODO: I will improve this function by removing the check statements
   def filtered
     @user = User.find(params[:user_id])
     @form = Form.find_by(_type: params[:_type])
