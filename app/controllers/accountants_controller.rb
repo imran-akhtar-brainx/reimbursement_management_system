@@ -6,16 +6,6 @@ class AccountantsController < ApplicationController
     @user = current_user
     @form = Form.find_by(_type: "working")
     @submissions = @user.submissions.where(form_id: @form.id)
-
-  end
-
-  def show
-  end
-
-  def employee_submissions
-    @user = User.find(params[:id])
-    @form = Form.find_by(_type: "working")
-    @submissions = @user.submissions.where(form_id: @form.id)
   end
 
   def applicants
@@ -25,7 +15,7 @@ class AccountantsController < ApplicationController
   def user_submissions
     @user = User.find(params[:user_id])
     @submission = Submission.find(params[:submission_id])
-    @submission.data = @submission.data.except('name_of_patient', 'relationship_with_employee','reporting_manager','name_of_patient','relationship_with_employee','project_name')
+    @submission.data = @submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
     respond_to do |format|
       format.html
       format.xlsx do
@@ -34,7 +24,6 @@ class AccountantsController < ApplicationController
       end
     end
   end
-
 
   private
 

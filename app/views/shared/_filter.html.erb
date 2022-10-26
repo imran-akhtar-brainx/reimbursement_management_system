@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-end">
     <%= form_with class: "app-container", url: filtered_submissions_path, method: :get do |f| %>
       <%= f.text_field "date-picker", name: "daterange" %>
-      <%= f.select(:date, [["Date", ""],["Today", "today"], ["Last 7 days", "week"], ["Current Month", "month"]]) %>
+      <%= f.select(:date, [["Date", ""], ["Today", "today"], ["Last 7 days", "week"], ["Current Month", "month"]]) %>
       <%= f.hidden_field :_type, value: @form._type %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <span><%= f.submit "Submit" %> </span>

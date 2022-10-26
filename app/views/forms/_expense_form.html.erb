@@ -1,12 +1,12 @@
 <%= render "shared/forms-list" %>
 <% counter = 0 %>
 <div class="container mt-5">
-  <%= form_with class:"app-container", url: submissions_path, method: :post do |form| %>
+  <%= form_with class: "app-container", url: submissions_path, method: :post do |form| %>
     <div class="d-flex">
       <div class="col-6">
         <div class="d-flex">
           <div class="col-4">
-            <%= image_tag "site-logo.png"%>
+            <%= image_tag "site-logo.png" %>
           </div>
           <div class="col-8 d-flex align-items-center">
             <h3>Expense Claim Form</h3>
@@ -93,7 +93,7 @@
           <% unless ["project_name"].include? key %>
             <td>
               <% if key == "amount" %>
-                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none",  type: "number", required: true%></td>
+                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "number", required: true %></td>
               <% else %>
                 <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", required: true %></td>
               <% end %>
@@ -103,7 +103,9 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-end" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
-      <button type="button" class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add Form Row</button>
+      <button type="button" class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add
+        Form Row
+      </button>
     </div>
     <div class="d-flex justify-content-center">
       <%= form.submit "Submit", class: "btn btn-outline-primary btn-lg" %>

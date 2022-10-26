@@ -25,3 +25,55 @@ Submission.where(form_id: 1).update(data: {"name_of_patient"=>"fsdf", "relations
 Submission.where(form_id: 2).update(data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})
 Submission.where(created_at: Time.new(2022,10,15)..Time.new(2022,10,20))
 Submission.where(created_at: (Date.parse('2022-10-15')..Date.parse('2022-10-20')))
+
+
+#single
+Submission.take
+
+#multiple
+Submission.all.each do |submission|
+  puts submission.status
+end
+
+Submission.find_each(batch_size: 20) do |submission|
+  puts submission.status
+end
+
+#find in batch
+Submission.find_in_batches(batch_size: 10) do |submission|
+end
+
+
+#condition
+Submission.where(status: "pending")
+
+#overriding
+Submission.where('id > 10').limit(20).order('id desc').unscope(:order)
+
+Submission.select(:status, :data).reselect(:created_at)
+
+#Locking
+c1 = User.find(1)
+c2 = User.find(1)
+c1.name = "Sandra"
+c1.save
+c2.name = "Michael"
+c2.save
+
+
+#eager loading
+users = User.limit(5)
+users.each do |user|
+  puts user.role
+end
+
+users = User.includes(:roles).limit(5)
+users.each do |user|
+  puts user.roles
+end
+
+#enums
+Role.first.admin?
+Role.first.software_engineer?
+
+

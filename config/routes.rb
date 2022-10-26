@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   namespace :supervisor do
-      # resources :submissions
-      # resources :roles
-      # resources :forms
       resources :users
-
       root to: "users#index"
     end
   namespace :admin do
@@ -36,7 +32,6 @@ Rails.application.routes.draw do
   end
   resources :accountants do
     collection do
-      get 'employee_submissions'
       get 'applicants'
       get 'user_submissions'
       get 'excel_generator'

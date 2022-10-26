@@ -8,7 +8,7 @@
     display: none !important;
 }
 
-form .row{
+form .row {
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
@@ -31,31 +31,34 @@ form .row{
     width: 100%;
 }
 
-.body{
+.body {
     background-color: #F7F7F7;
 }
 
-.main-dashboard{
+.main-dashboard {
     background-color: white;
 }
-.app-container{
+
+.app-container {
     /*margin-top: 150px;*/
     background-color: white;
     padding: 20px;
 }
-.dropdown-forms{
+
+.dropdown-forms {
     margin-right: 276px;
     margin-top: 105px;
 }
 
-.header-requested-button{
+.header-requested-button {
     margin-left: 680px;
 }
-.header-submission-button{
+
+.header-submission-button {
     margin-left: 100px;
 }
 
-.gallery{
+.gallery {
     height: 200px;
     width: 400px;
 }

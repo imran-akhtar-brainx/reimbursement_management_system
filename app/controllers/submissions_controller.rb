@@ -1,5 +1,4 @@
 class SubmissionsController < ApplicationController
-  #user for current user submission
   def employee_submissions
     @user = User.find(params[:user_id])
     @form = Form.find_by(_type: params[:_type])
@@ -7,15 +6,14 @@ class SubmissionsController < ApplicationController
   end
 
   def filtered
-    # debugger
     @user = User.find(params[:user_id])
     @form = Form.find_by(_type: params[:_type])
     if params[:date] == "today"
       @submissions = @user.submissions.where(form_id: @form.id, created_at: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
     elsif params[:date] == "week"
-      @submissions = @user.submissions.where(form_id: @form.id, created_at:  Time.zone.today.beginning_of_week..Time.zone.today.end_of_week)
+      @submissions = @user.submissions.where(form_id: @form.id, created_at: Time.zone.today.beginning_of_week..Time.zone.today.end_of_week)
     elsif params[:date] == "month"
-      @submissions = @user.submissions.where(form_id: @form.id, created_at:  Time.zone.today.beginning_of_month..Time.zone.today.end_of_month)
+      @submissions = @user.submissions.where(form_id: @form.id, created_at: Time.zone.today.beginning_of_month..Time.zone.today.end_of_month)
     else
       range = params['daterange']
       range = range.split(' - ', 2)

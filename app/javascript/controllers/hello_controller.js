@@ -8,7 +8,6 @@ export default class extends Controller {
         this.formList = [];
         $('input[name="daterange"]').daterangepicker(
             {
-
                 locale: {
                     cancelLabel: 'Clear',
                     format: 'YYYY-MM-DD'
@@ -16,10 +15,9 @@ export default class extends Controller {
                 startDate: '2022-10-01',
                 endDate: '2022-10-26'
             },
-            function(start, end, label) {
+            function (start, end, label) {
                 alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
             });
-
     }
 
     greet() {
@@ -39,8 +37,8 @@ export default class extends Controller {
                 field.classList.add(["border-none"]);
                 field.setAttribute("id", "data" + `[${this.counterValue}]` + `[${key}]`)
                 field.setAttribute("name", "data" + `[${this.counterValue}]` + `[${key}]`)
-                field.setAttribute("required", true )
-                if (key == "amount"){
+                field.setAttribute("required", true)
+                if (key == "amount") {
                     field.setAttribute("type", "number")
                 }
                 dt.appendChild(field);

@@ -2,14 +2,14 @@
   <table class="table table-bordered table-hover mt-4 form-table">
     <thead>
     <tr>
-      <th scope="col" class="bg-secondary"> Employee ID </th>
-      <th scope="col" class="bg-secondary"> Employee Name </th>
+      <th scope="col" class="bg-secondary"> Employee ID</th>
+      <th scope="col" class="bg-secondary"> Employee Name</th>
       <th scope="col" class="bg-secondary">Total</th>
     </tr>
     </thead>
     <tbody>
     <% @users.each do |user| %>
-      <tr onclick="location.href='<%= employee_submissions_accountants_path(id: user.id, format: :html) %>'">
+      <tr onclick="location.href='<%= employee_submissions_submissions_path(user_id: user.id, _type: "working", format: :html) %>'">
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.total_generator(user.submissions) %></td>
