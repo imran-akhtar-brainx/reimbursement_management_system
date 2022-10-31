@@ -13,16 +13,15 @@ class UserDashboard < Administrate::BaseDashboard
     department: Field::String,
     email: Field::String,
     emp_id: Field::String,
-    encrypted_password: Field::String,
-    forms: Field::HasMany,
-    manager: Field::BelongsTo,
+    password: Field::String,
+    manager: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+      ),
     name: Field::String,
     phone: Field::Number,
     remember_created_at: Field::DateTime,
-    reset_password_sent_at: Field::DateTime,
-    reset_password_token: Field::String,
     roles: Field::HasMany,
-    submissions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -47,16 +46,12 @@ class UserDashboard < Administrate::BaseDashboard
     department
     email
     emp_id
-    encrypted_password
-    forms
+    password
     manager
     name
     phone
     remember_created_at
-    reset_password_sent_at
-    reset_password_token
     roles
-    submissions
     created_at
     updated_at
   ].freeze
@@ -65,20 +60,15 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    address
-    department
-    email
-    emp_id
-    encrypted_password
-    forms
-    manager
     name
+    email
+    password
+    emp_id
     phone
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
+    department
+    manager
     roles
-    submissions
+    address
   ].freeze
 
   # COLLECTION_FILTERS
@@ -99,4 +89,7 @@ class UserDashboard < Administrate::BaseDashboard
   # def display_resource(user)
   #   "User ##{user.id}"
   # end
+  def display_resource(user)
+    user.name
+  end
 end

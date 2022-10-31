@@ -16,7 +16,7 @@ Role.create(_type: :project_manager , medical_allowance: 15000 , travel_allowanc
 User.create(email: :"soban.akbar@gmail.com", password: :"qwerty", emp_id: :"0222", name: :"Soban Akbar", phone: 03340053, department: :"Accounts")
 
 Role.create(_type: :accountant , medical_allowance: 15000 , travel_allowance: 1000 , fitness_allowance: 32330, dinner_allowance: 3000)
-Form.create(_type: :"working", data: {date: "25 july 2020", day: "monday", reason: "client need", nature: "weekend"})
+Form.create(_type: :"working", data: {"reporting_manager":"", date:"" ,day:"", reason_of_working:"", nature_of_holiday:"",amount:""})
 Form.create(_type: :"expense", data: {project_name: "..", details: "..", amount: "..."})
 Form.create(_type: :"general", data: {description: "", amount: ""})
 

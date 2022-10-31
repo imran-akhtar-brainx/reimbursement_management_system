@@ -2,16 +2,16 @@
   <div class="app-container">
     <h2 class="d-flex justify-content-center"><%= @form._type.titleize %></h2>
     <%= render 'shared/filter' %>
-    <% if @active_role == "accountants" and @user.role != "accountant" %>
+    <% if @active_role == "accountants" and current_user.role != "accountant" %>
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           Form Types
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working", user_id: @user.id), class: "dropdown-item" %></li>
-          <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical", user_id: @user.id), class: "dropdown-item" %></li>
-          <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense", user_id: @user.id), class: "dropdown-item" %></li>
-          <li><%= link_to "General", employee_submissions_submissions_path(_type: "general", user_id: @user.id), class: "dropdown-item" %></li>
+          <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working"), class: "dropdown-item" %></li>
+          <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical"), class: "dropdown-item" %></li>
+          <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense"), class: "dropdown-item" %></li>
+          <li><%= link_to "General", employee_submissions_submissions_path(_type: "general"), class: "dropdown-item" %></li>
         </ul>
       </div>
     <% else %>
@@ -28,7 +28,7 @@
       </thead>
       <tbody>
       <% @submissions.each do |submission| %>
-        <tr onclick="location.href='<%= submission_path(submission.id, user_id: @user.id) %>'">
+        <tr onclick="location.href='<%= submission_path(submission.id) %>'">
           <td><%= @form._type %></td>
           <td><%= submission.created_at.strftime("%Y-%m-%d") %></td>
           <td><%= submission.status %></td>

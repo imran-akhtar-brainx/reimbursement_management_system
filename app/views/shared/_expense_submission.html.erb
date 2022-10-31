@@ -40,7 +40,6 @@
       </div>
     </div>
   </div>
-
   <div class="row mt-4">
     <div class="col-6">
       <div class="row">
@@ -94,7 +93,7 @@
   </table>
   <% if @active_role == "accountants" && @user.role != "accountant" %>
     <div class="d-flex justify-content-end">
-      <h4> Total: <%= @user.total_generator([@submission])%></h4>
+      <h4> Total: <%= @user.total_generator([@submission]) %></h4>
     </div>
     <div class="d-flex justify-content-center">
       <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id], submission_id: @submission.id), class: "btn btn-primary" %>

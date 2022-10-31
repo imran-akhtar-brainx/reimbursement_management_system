@@ -76,10 +76,18 @@ GEM
       kaminari (>= 1.0)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate-bootstrap-theme (1.0.6)
+      administrate (~> 0.14)
+    autoprefixer-rails (10.4.7.0)
+      execjs (~> 2)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
+    bootstrap (5.2.2)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.11.6, < 3)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     capybara (3.37.1)
       addressable
@@ -104,6 +112,7 @@ GEM
       warden (~> 1.2.3)
     digest (3.1.0)
     erubi (1.11.0)
+    execjs (2.8.1)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -168,6 +177,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.3)
+    popper_js (2.11.6)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -272,13 +282,16 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  administrate-bootstrap-theme (~> 1.0, >= 1.0.6)
   bootsnap
+  bootstrap (~> 5.2.2)
   capybara
   debug
   devise (~> 4.8, >= 4.8.1)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  jquery-rails
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
@@ -296,4 +309,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.2.22
+   2.3.7

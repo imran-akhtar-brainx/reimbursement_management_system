@@ -19,8 +19,8 @@ class Submission < ApplicationRecord
 
   def submission_total(submission)
     sum = 0
-    submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
-    submission.data.values.each do |key, value|
+    submission.data = submission&.data&.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
+    submission&.data&.values&.each do |key, value|
       sum += (key['amount'].to_i)
     end
     sum

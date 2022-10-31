@@ -5,10 +5,10 @@
         Submitted Forms
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working", user_id: @user.id), class: "dropdown-item" %></li>
-        <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical", user_id: @user.id), class: "dropdown-item" %></li>
-        <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense", user_id: @user.id), class: "dropdown-item" %></li>
-        <li><%= link_to "General", employee_submissions_submissions_path(_type: "general", user_id: @user.id), class: "dropdown-item" %></li>
+        <li><%= link_to "Working", employee_submissions_submissions_path(_type: "working"), class: "dropdown-item" %></li>
+        <li><%= link_to "Medical", employee_submissions_submissions_path(_type: "medical"), class: "dropdown-item" %></li>
+        <li><%= link_to "Expense", employee_submissions_submissions_path(_type: "expense"), class: "dropdown-item" %></li>
+        <li><%= link_to "General", employee_submissions_submissions_path(_type: "general"), class: "dropdown-item" %></li>
       </ul>
     </div>
   </div>

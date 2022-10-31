@@ -23,12 +23,12 @@ class User < ApplicationRecord
 
   def total_generator(submissions)
     sum = 0
-    submissions.each do |submission|
-      submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
-      submission.data.values.each do |key, value|
-        sum += (key['amount'].to_i)
-      end
-    end
+    # submissions.each do |submission|
+    #   submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
+    #   submission.data.values.each do |key, value|
+    #     sum += (key['amount'].to_i)
+    #   end
+    # end
     sum
   end
 

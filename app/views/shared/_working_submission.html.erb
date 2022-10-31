@@ -53,13 +53,12 @@
       </div>
     </div>
   </div>
-
   <div class="d-flex">
     <div class="col-3">
       <span>Reporting manager :</span>
     </div>
     <div class="col-9">
-      <span><%= @user&.manager&.name %></span>
+      <span><%= @user.manager&.name %></span>
     </div>
   </div>
 
@@ -86,7 +85,7 @@
 
   <% if @active_role == "accountants" && @user.role != "accountant" %>
     <div class="d-flex justify-content-end">
-      <h4> Total: <%= @user.total_generator([@submission])%></h4>
+      <h4> Total: <%= @user.total_generator([@submission]) %></h4>
     </div>
 
     <div class="d-flex justify-content-center">

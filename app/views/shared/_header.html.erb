@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon">home_</span>
+    <span class="navbar-toggler-icon">home</span>
   </button>
   <div class="dropdown mx-2">
     <i id="dropdownMenuButton1" class="dropdown-toggle fa-solid fa-bars icon" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -19,7 +19,7 @@
 
         <li>
           <div class="dropdown-item">
-            <%= link_to 'Log Out', destroy_user_session_path, :class => "btn", data: { "turbo-method": :delete } %>
+            <%= link_to 'Log Out', destroy_user_session_path, :class => "btn" %>
           </div>
         </li>
 
@@ -42,5 +42,4 @@
     <%= link_to "My Submissions", accountants_path, class: "btn btn-primary header-requested-button" %>
     <%= link_to "Requested Submissions", applicants_accountants_path, class: "btn btn-primary header-submission-button" %>
   <% end %>
-
 </nav>

@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
-  namespace :supervisor do
-      resources :users
-      root to: "users#index"
-    end
+  # namespace :supervisor do
+  #   resources :users
+  #   root to: "users#index"
+  # end
   namespace :admin do
-      resources :submissions
-      resources :roles
-      resources :forms
-      resources :users
-
-      root to: "submissions#index"
-    end
+    resources :roles
+    resources :forms
+    resources :users
+    devise_for :users
+    root to: "users#index"
+  end
   root to: "employees#index"
   devise_for :users
   resources :employees do

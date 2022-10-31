@@ -54,7 +54,7 @@
             <span>Name of Patient :</span>
           </div>
           <div class="col-8">
-            <span class="form-header"><%= @submission.data['name_of_patient'] %></span>
+            <span class="form-header"><%= @submission&.data['name_of_patient'] %></span>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <span>Relationship with Employee :</span>
       </div>
       <div class="col-9">
-        <span> <%= @submission.data['relationship_with_employee'] %></span>
+        <span> <%= @submission&.data['relationship_with_employee'] %></span>
       </div>
     </div>
 

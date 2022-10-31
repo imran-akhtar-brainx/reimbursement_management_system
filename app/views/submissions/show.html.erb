@@ -3,11 +3,10 @@
   <% @submission.images.each do |image| %>
     <div class="gallery">
       <% if image.representable? %>
-        <%= link_to image, "data-toggle": "lightbox", "data-gallery": "example-gallery", class: "col-sm-4" do %>
-          <%= image_tag image, class: "h-100 w-100 modal-body" %>
-        <% end %>
-      <% end %>
+        <a data-fslightbox href=<%= Rails.application.routes.url_helpers.rails_blob_url(image)%>>
+          <%= image_tag image, class: "h-100 w-100 modal-body"  %>
+        </a>
+    <% end %>
     </div>
   <% end %>
 </div>
-

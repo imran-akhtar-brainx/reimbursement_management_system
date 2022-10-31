@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
       managers_path
     elsif resource.has_role?('accountant')
       accountants_path
+    elsif resource.has_role?('admin')
+      admin_root_path
     else
       employees_path
     end
@@ -23,6 +25,8 @@ class ApplicationController < ActionController::Base
                        'managers'
                      elsif role == 'accountant'
                        'accountants'
+                     elsif role == 'admin'
+                       'admin'
                      else
                        'employees'
                      end

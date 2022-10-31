@@ -9,12 +9,11 @@ class RoleDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    _type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    _type: Field::Select.with_options(searchable: true, prettify: true, i18n: true, collection: ->(field) {  field.resource.class.send(field.attribute.to_s.pluralize).keys.map{|key|  [key.titleize, key]}}),
     dinner_allowance: Field::Number.with_options(decimals: 2),
     fitness_allowance: Field::Number.with_options(decimals: 2),
     medical_allowance: Field::Number.with_options(decimals: 2),
     travel_allowance: Field::Number.with_options(decimals: 2),
-    users: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -40,7 +39,6 @@ class RoleDashboard < Administrate::BaseDashboard
     fitness_allowance
     medical_allowance
     travel_allowance
-    users
     created_at
     updated_at
   ].freeze
@@ -54,7 +52,6 @@ class RoleDashboard < Administrate::BaseDashboard
     fitness_allowance
     medical_allowance
     travel_allowance
-    users
   ].freeze
 
   # COLLECTION_FILTERS
@@ -72,7 +69,7 @@ class RoleDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how roles are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(role)
-  #   "Role ##{role.id}"
-  # end
+  def display_resource(role)
+    role._type.titleize
+  end
 end

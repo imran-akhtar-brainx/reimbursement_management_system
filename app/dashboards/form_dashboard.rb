@@ -10,9 +10,6 @@ class FormDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     _type: Field::String,
-    data: Field::String.with_options(searchable: false),
-    submissions: Field::HasMany,
-    users: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,8 +22,6 @@ class FormDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     _type
-    data
-    submissions
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,9 +29,6 @@ class FormDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     _type
-    data
-    submissions
-    users
     created_at
     updated_at
   ].freeze
@@ -46,9 +38,6 @@ class FormDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     _type
-    data
-    submissions
-    users
   ].freeze
 
   # COLLECTION_FILTERS
