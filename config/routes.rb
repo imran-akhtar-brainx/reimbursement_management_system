@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # namespace :supervisor do
-  #   resources :users
-  #   root to: "users#index"
-  # end
   namespace :admin do
     resources :roles
     resources :forms
@@ -10,7 +6,7 @@ Rails.application.routes.draw do
     devise_for :users
     root to: "users#index"
   end
-  root to: "employees#index"
+  root to: "submissions#index"
   devise_for :users
   resources :employees do
     collection do
@@ -26,12 +22,12 @@ Rails.application.routes.draw do
     collection do
       get 'submitted_forms'
       get 'form_submissions'
-      get 'requested_employees'
+      get 'applicants'
     end
   end
   resources :accountants do
     collection do
-      get 'applicants'
+      get 'employees'
       get 'user_submissions'
       get 'excel_generator'
     end
@@ -43,8 +39,8 @@ Rails.application.routes.draw do
   end
   resources :submissions do
     collection do
-      get 'employee_submissions'
       get 'filtered'
     end
+    get 'user_submissions', on: :member
   end
 end

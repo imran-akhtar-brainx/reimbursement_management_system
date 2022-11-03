@@ -7,29 +7,26 @@ class ApplicationController < ActionController::Base
   end
 
   def default_path_for_user(resource)
-    if resource.has_role?('project_manager')
-      managers_path
-    elsif resource.has_role?('accountant')
-      accountants_path
-    elsif resource.has_role?('admin')
+    if resource.has_role?('admin')
       admin_root_path
     else
-      employees_path
+      submissions_path
     end
   end
 
   def set_user_role
     if current_user.present?
       role = current_user.role
-      @active_role = if role == 'project_manager'
-                       'managers'
-                     elsif role == 'accountant'
-                       'accountants'
-                     elsif role == 'admin'
-                       'admin'
-                     else
-                       'employees'
-                     end
+      case role
+      when 'project_manager'
+        @active_role = 'managers'
+      when 'accountant'
+        @active_role = 'accountants'
+      when 'admin'
+        @active_role = 'admin'
+      else
+        @active_role = 'employees'
+      end
     end
   end
 end

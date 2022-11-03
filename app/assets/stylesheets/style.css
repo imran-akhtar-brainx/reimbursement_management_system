@@ -40,7 +40,6 @@ form .row {
 }
 
 .app-container {
-    /*margin-top: 150px;*/
     background-color: white;
     padding: 20px;
 }
@@ -51,11 +50,11 @@ form .row {
 }
 
 .header-requested-button {
-    margin-left: 680px;
+    margin-left: 32%;
 }
 
 .header-submission-button {
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .gallery {

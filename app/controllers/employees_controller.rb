@@ -1,11 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :check_employee
 
-  def index
-    @user = current_user
-    @form = Form.find_by(_type: "working")
-    @submissions = @user.submissions.where(form_id: @form.id)
-  end
 
   private
 

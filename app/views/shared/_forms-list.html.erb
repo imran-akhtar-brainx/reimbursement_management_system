@@ -4,10 +4,9 @@
       Form Types
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><%= link_to "Working", new_submission_path(_type: "working"), class: "dropdown-item" %></li>
-      <li><%= link_to "Medical", new_submission_path(_type: "medical"), class: "dropdown-item" %></li>
-      <li><%= link_to "Expense", new_submission_path(_type: "expense"), class: "dropdown-item" %></li>
-      <li><%= link_to "General", new_submission_path(_type: "general"), class: "dropdown-item" %></li>
+      <% @forms.each do |form| %>
+        <li><%= link_to form._type.titleize, new_submission_path(_type: form._type), class: "dropdown-item" %></li>
+      <% end %>
     </ul>
     </li>
   </div>

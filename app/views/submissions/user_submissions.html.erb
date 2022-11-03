@@ -1,8 +1,10 @@
-<div class="row bg-light">
-  <div class="col-10">
+<div class="container">
+  <div class="app-container">
+    <h2 class="d-flex justify-content-center"><%= @form._type.titleize %></h2>
+    <%= render 'shared/filter' %>
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Submitted Forms
+        Form Types
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <% @forms.each do |form| %>
@@ -10,9 +12,7 @@
         <% end %>
       </ul>
     </div>
-  </div>
-
-  <div class="col-2">
-    <%= link_to "New From", new_submission_path, class: "btn btn-primary mt-1 float-end" %>
+    <%= render 'submissions/table' %>
   </div>
 </div>
+

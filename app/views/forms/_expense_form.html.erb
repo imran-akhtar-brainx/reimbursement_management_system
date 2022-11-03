@@ -69,8 +69,6 @@
         <span class="form-header"><%= form.text_field "data[project_name]", required: true %></span>
         <%= form.hidden_field :_type, value: @form._type %>
       </div>
-      <div class="col-6">
-      </div>
     </div>
 
     <div class="d-flex">
@@ -81,7 +79,7 @@
       <thead>
       <tr>
         <% @form.data.keys.each do |key| %>
-          <% unless ["project_name"].include? key %>
+          <% if key != "project_name" && key != "total" %>
             <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
@@ -90,25 +88,21 @@
       <tbody id="expense-table">
       <tr>
         <% @form.data.each do |key, value| %>
-          <% unless ["project_name"].include? key %>
+          <% if key != "project_name" && key != "total" %>
             <td>
-              <% if key == "amount" %>
-                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "number", required: true %></td>
-              <% else %>
-                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", required: true %></td>
-              <% end %>
+              <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", required: true %></td>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
-    <div class="d-flex justify-content-end" data-controller="hello" data-hello-url-value="<%= @form.data.keys %>" data-hello-counter-value="<%= counter %>" data-hello-type-value="<%= @form._type %>">
-      <button type="button" class="btn btn-outline-primary" data-action="click->hello#createElement" data-target="hello.form">Add
+    <div class="d-flex justify-content-end" data-controller="table" data-table-row-value="<%= @form.data.keys %>" data-table-counter-value="<%= counter %>" data-table-type-value="<%= @form._type %>">
+      <button type="button" class="btn btn-outline-primary" data-action="click->table#createElement" data-target="table.form">Add
         Form Row
       </button>
     </div>
     <div class="d-flex justify-content-center">
-      <%= form.submit "Submit", class: "btn btn-outline-primary btn-lg" %>
+      <%= form.submit "Submit", class: " btn btn-outline-primary btn-lg" %>
     </div>
   <% end %>
 </div>

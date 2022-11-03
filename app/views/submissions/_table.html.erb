@@ -1,0 +1,18 @@
+<table class="table mt-4 form-table table-hover mt-5">
+  <thead>
+  <tr>
+    <th scope="col" class="bg-secondary">Form Type</th>
+    <th scope="col" class="bg-secondary">Creation Date</th>
+    <th scope="col" class="bg-secondary">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @submissions.each do |submission| %>
+    <tr onclick="location.href='<%= submission_path(submission.id) %>'">
+      <td><%= @form._type %></td>
+      <td><%= submission.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= submission.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

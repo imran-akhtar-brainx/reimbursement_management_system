@@ -2,12 +2,3 @@
 # yarn lockfile v1
 
 
-fslightbox@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/fslightbox/-/fslightbox-3.3.1.tgz#33754f901ad776eb85122e685712eff84d21f04d"
-  integrity sha512-r8mS2lnqw+4F7fQmIXZ4Y+tulxqGsZyG7wzMhWKl8MHvVZRJnclUyt+n+hfTkUa+e1bvlzpw4tY/X9mwqC4wCg==
-
-simplelightbox@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/simplelightbox/-/simplelightbox-2.10.4.tgz#08d7b6ddb7290f1b1f52e0ff1c091922787fc26e"
-  integrity sha512-1sPONJV5wpzLhVCmZjkqa146mYy2kzZfvsljJ11acjMXOX2wL/KJ9Q2uanMsJUh09Ljq/pHEcTt9mCFWM7d/AQ==

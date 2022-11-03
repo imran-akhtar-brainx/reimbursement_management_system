@@ -12,7 +12,7 @@
       <tr onclick="location.href='<%= show_request_manager_path(id: user.id) %>'">
         <td><%= user.id %></td>
         <td><%= user.name %></td>
-        <td><%= user.pending_submissions(user.id).count %></td>
+        <td><%= user.submissions.pending.count %></td>
       </tr>
     <% end %>
     </tbody>

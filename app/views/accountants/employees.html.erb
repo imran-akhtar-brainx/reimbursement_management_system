@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <% @users.each do |user| %>
-      <tr onclick="location.href='<%= employee_submissions_submissions_path(user_id: user.id, _type: "working", format: :html) %>'">
+      <tr onclick="location.href='<%= user_submissions_submission_path(id: user.id, _type: "working") %>'">
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.total_generator(user.submissions) %></td>

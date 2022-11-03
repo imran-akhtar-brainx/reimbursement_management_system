@@ -1,21 +1,13 @@
 class AccountantsController < ApplicationController
   # TODO we will add account portal
   before_action :check_accountant
-
-  def index
-    @user = current_user
-    @form = Form.find_by(_type: "working")
-    @submissions = @user.submissions.where(form_id: @form.id)
-  end
-
-  def applicants
-    @users = User.all
+  def employees
+    @users = User.joins(:roles).where.not('roles._type' => 'admin').order(:id).distinct
   end
 
   def user_submissions
-    @user = User.find(params[:user_id])
     @submission = Submission.find(params[:submission_id])
-    @submission.data = @submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
+    @user = @submission.user
     respond_to do |format|
       format.html
       format.xlsx do
@@ -37,8 +29,8 @@ class AccountantsController < ApplicationController
     worksheet = workbook.add_worksheet
     data = []
     data << submission.data.values.first.keys
-    submission.data.values.each do |row|
-      data << row.values
+    submission.data.values.each do |value|
+      data << value.values
     end
     worksheet.write_col(0, 0, data)
     workbook.close

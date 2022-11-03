@@ -22,7 +22,7 @@
           <span>Employee Name:</span>
         </div>
         <div class="col-8">
-          <span><%= @user.name %></span>
+          <span><%= @submission.user.name %></span>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
           <span>Job Title: </span>
         </div>
         <div class="col-8">
-          <span><%= @user.role.titleize %></span>
+          <span><%= @submission.user.role.titleize %></span>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
         <div class="col-4">
           <span>Employee ID :</span></div>
         <div class="col-8 form-header">
-          <span><%= @user.emp_id %></span>
+          <span><%= @submission.user.emp_id %></span>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <span>Department :</span>
         </div>
         <div class="col-8">
-          <span class="form-header"><%= @user.department %></span>
+          <span class="form-header"><%= @submission.user.department %></span>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
   <table class="table table-bordered mt-4 form-table">
     <thead>
     <tr>
-      <% @form.data.keys.each do |key| %>
+      <% @submission.form.data.keys.each do |key| %>
         <% unless ["project_name"].include? key %>
           <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
         <% end %>
@@ -80,4 +80,5 @@
     <% end %>
     </tbody>
   </table>
+  <%= render 'shared/excel' %>
 </div>

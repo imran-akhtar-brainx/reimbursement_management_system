@@ -22,7 +22,7 @@
             <span>Employee Name:</span>
           </div>
           <div class="col-8">
-            <span><%= @user.name %></span>
+            <span><%= @submission.user.name %></span>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
             <span>Job Title: </span>
           </div>
           <div class="col-8">
-            <span><%= @user.role.titleize %></span>
+            <span><%= @submission.user.role.titleize %></span>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
           <div class="col-4">
             <span>Employee ID :</span></div>
           <div class="col-8 form-header">
-            <span><%= @user.emp_id %></span>
+            <span><%= @submission.user.emp_id %></span>
           </div>
         </div>
       </div>
@@ -72,15 +72,15 @@
     <table class="table table-bordered mt-4 form-table">
       <thead>
       <tr>
-        <% @form.data.keys.each do |key| %>
-          <% unless ["relationship_with_employee", "name_of_patient", "text", "date", "signature"].include? key %>
+        <% @submission.form.data.keys.each do |key| %>
+          <% unless ["name_of_patient", "relationship_with_employee", "project_name", 'project_name'].include? key %>
             <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
       </tr>
       </thead>
       <tbody id="medical-table">
-      <% @submission.data.except('name_of_patient', 'relationship_with_employee').each do |keys, values| %>
+      <% @submission.data.except('name_of_patient', 'relationship_with_employee', 'project_name', 'project_name').each do |keys, values| %>
         <tr>
           <% values.each do |key, value| %>
             <td><%= value %></td>
@@ -90,9 +90,5 @@
       </tbody>
     </table>
   </div>
-  <% if @active_role == "accountants" && @user.role != "accountant" %>
-    <div class="d-flex justify-content-center">
-      <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, user_id: params[:user_id], _type: params[:_type], form_id: params[:form_id], submission_id: @submission.id), class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  <%= render 'shared/excel' %>
 </div>
