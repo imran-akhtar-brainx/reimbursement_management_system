@@ -1,0 +1,25 @@
+<div class="container">
+  <table class="table table-bordered table-hover mt-4 form-table">
+    <thead>
+    <tr>
+      <% @submissions.first.data.keys.each do |key| %>
+        <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+      <% end %>
+      <th scope="col" class="bg-secondary"> Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @submissions.each do |submission| %>
+      <tr onclick="location.href='<%= submission_path(submission.id) %>'">
+        <% submission.data.each do |key, value| %>
+          <td> <%= value %>
+        <% end %>
+        <td> <%= submission.status %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to 'Excel', user_submissions_accountants_path(format: :xlsx, _type: params[:_type], form_id: params[:form_id]), class: "btn btn-primary" %>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<table class="table table-bordered mt-4 form-table">
+  <thead>
+  <tr>
+    <% @submission.form.data.keys.each do |key| %>
+      <% unless ["name_of_patient", "relationship_with_employee", "project_name", 'project_name'].include? key %>
+        <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+      <% end %>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody id="medical-table">
+  <% @submission.data.except('name_of_patient', 'relationship_with_employee', 'project_name', 'project_name').each do |keys, values| %>
+    <tr>
+      <% values.each do |key, value| %>
+        <td><%= value %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

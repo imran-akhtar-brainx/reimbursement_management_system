@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="dropdown dropdown-forms">
+    <button class="btn btn-primary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Form Types
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <% @forms.each do |form| %>
+        <li><%= link_to form._type.titleize, new_submission_path(_type: form._type), class: "dropdown-item" %></li>
+      <% end %>
+    </ul>
+    </li>
+  </div>
+</div>

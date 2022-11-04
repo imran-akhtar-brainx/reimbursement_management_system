@@ -1,0 +1,18 @@
+<div class="row bg-light">
+  <div class="col-10">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Submitted Forms
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <% @forms.each do |form| %>
+          <li><%= link_to form._type.titleize, submissions_path(_type: form._type), class: "dropdown-item" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-2">
+    <%= link_to "New From", new_submission_path, class: "btn btn-primary mt-1 float-end" %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<%= render "shared/#{@submission.form._type}_submission" %>
+<div class="container d-flex flex-wrap mt-5">
+  <% @submission.images.each do |image| %>
+    <div class="gallery">
+      <% if image.representable? %>
+        <a data-fslightbox href=<%= Rails.application.routes.url_helpers.rails_blob_url(image)%>>
+          <%= image_tag image, class: "h-100 w-100 modal-body"  %>
+        </a>
+    <% end %>
+    </div>
+  <% end %>
+</div>

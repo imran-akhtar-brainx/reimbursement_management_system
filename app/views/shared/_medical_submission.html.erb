@@ -1,0 +1,94 @@
+<div class="container mt-5 app-container">
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6 d-flex justify-content-center">
+      <div class="col-6 d-flex justify-content-center">
+        <%= image_tag "site-logo.png", class: "rounded float-start" %>
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row mt-3">
+      <span class="d-flex justify-content-center">BrainX Technologies</span>
+    </div>
+    <div class="row mt-3">
+      <h2 class="d-flex justify-content-center">Medical Claim Reimbursement Form</h2>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee Name:</span>
+          </div>
+          <div class="col-8">
+            <span><%= @submission.user.name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Job Title: </span>
+          </div>
+          <div class="col-8">
+            <span><%= @submission.user.role.titleize %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Employee ID :</span></div>
+          <div class="col-8 form-header">
+            <span><%= @submission.user.emp_id %></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <span>Name of Patient :</span>
+          </div>
+          <div class="col-8">
+            <span class="form-header"><%= @submission&.data['name_of_patient'] %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span>Relationship with Employee :</span>
+      </div>
+      <div class="col-9">
+        <span> <%= @submission&.data['relationship_with_employee'] %></span>
+      </div>
+    </div>
+
+    <table class="table table-bordered mt-4 form-table">
+      <thead>
+      <tr>
+        <% @submission.form.data.keys.each do |key| %>
+          <% unless ["name_of_patient", "relationship_with_employee", "project_name", 'project_name'].include? key %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
+          <% end %>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody id="medical-table">
+      <% @submission.data.except('name_of_patient', 'relationship_with_employee', 'project_name', 'project_name').each do |keys, values| %>
+        <tr>
+          <% values.each do |key, value| %>
+            <td><%= value %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= render 'shared/excel' %>
+</div>

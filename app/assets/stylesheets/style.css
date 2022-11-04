@@ -8,6 +8,10 @@
     display: none !important;
 }
 
+form .row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
 
 .form-input-field:focus {
     outline: none;
@@ -25,4 +29,54 @@
 .border-none {
     border: none;
     width: 100%;
+}
+
+.body {
+    background-color: #F7F7F7;
+}
+
+.main-dashboard {
+    background-color: white;
+}
+
+.app-container {
+    background-color: white;
+    padding: 20px;
+}
+
+.dropdown-forms {
+    margin-right: 276px;
+    margin-top: 105px;
+}
+
+.header-requested-button {
+    margin-left: 32%;
+}
+
+.header-submission-button {
+    margin-left: 10%;
+}
+
+.gallery {
+    height: 200px;
+    width: 400px;
+}
+
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,200px);
+    justify-content: center;
+    align-content: center;
+    grid-gap: 10px;
+    height: 100vh;
+}
+
+.grid img{
+    width: 200px;
+    height: 200px;
 }

@@ -1,24 +1,26 @@
+<%= render "shared/forms-list" %>
+<% counter = 0 %>
 <div class="container mt-5">
-  <%= form_with url: submissions_path, method: :post do |form| %>
-    <div class="row">
+  <%= form_with class: "app-container", url: submissions_path, method: :post do |form| %>
+    <div class="d-flex">
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
-            <span>logo</span>
+            <%= image_tag "site-logo.png" %>
           </div>
-          <div class="col-8">
-            <span>Expense Claim Form</span>
+          <div class="col-8 d-flex align-items-center">
+            <h3>Expense Claim Form</h3>
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <h6>BrainX technologies</h6>
+      <div class="col-6 d-flex align-items-center justify-content-end mt-5">
+        <span>BrainX technologies</span>
       </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="d-flex mt-5">
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Employee Name:</span>
           </div>
@@ -28,20 +30,20 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Job Title: </span>
           </div>
           <div class="col-8">
-            <span><%= current_user.role %></span>
+            <span><%= current_user.role.titleize %></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="d-flex mt-4">
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Employee ID :</span></div>
           <div class="col-8 form-header">
@@ -50,7 +52,7 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="row">
+        <div class="d-flex">
           <div class="col-4">
             <span>Department :</span>
           </div>
@@ -61,39 +63,46 @@
       </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="d-flex mt-4">
       <div class="col-6">
         <span>Project Name :</span>
-        <span class="form-header"><%= form.text_field "data[project_name]" %></span>
-        <%= form.hidden_field :form_id, value: @form.id %>
+        <span class="form-header"><%= form.text_field "data[project_name]", required: true %></span>
+        <%= form.hidden_field :_type, value: @form._type %>
       </div>
-      <div class="col-6">
-      </div>
+    </div>
+
+    <div class="d-flex">
+      <%= form.file_field :images, multiple: true %>
     </div>
 
     <table class="table table-bordered mt-4 form-table">
       <thead>
       <tr>
         <% @form.data.keys.each do |key| %>
-          <% unless ["project_name", "total", "amount_in_words"].include? key %>
-            <th scope="col"> <%= key %> </th>
+          <% if key != "project_name" && key != "total" %>
+            <th scope="col" class="bg-secondary"> <%= key.titleize %> </th>
           <% end %>
         <% end %>
       </tr>
       </thead>
-      <tbody>
+      <tbody id="expense-table">
       <tr>
         <% @form.data.each do |key, value| %>
-          <% unless ["project_name", "total", "amount_in_words"].include? key %>
-            <th scope="col">
-              <%= form.text_field "data[#{key}]", class: "border-none" %>
+          <% if key != "project_name" && key != "total" %>
+            <td>
+              <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", required: true %></td>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
-    <div>
-      <%= form.submit "Submit", class: "btn-primary" %>
+    <div class="d-flex justify-content-end" data-controller="table" data-table-row-value="<%= @form.data.keys %>" data-table-counter-value="<%= counter %>" data-table-type-value="<%= @form._type %>">
+      <button type="button" class="btn btn-outline-primary" data-action="click->table#createElement" data-target="table.form">Add
+        Form Row
+      </button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= form.submit "Submit", class: " btn btn-outline-primary btn-lg" %>
     </div>
   <% end %>
 </div>
