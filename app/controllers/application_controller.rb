@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   end
 
   def default_path_for_user(resource)
-    debugger
     if resource.has_role?('admin')
       admin_root_path
     elsif resource.has_role?('accountant')
