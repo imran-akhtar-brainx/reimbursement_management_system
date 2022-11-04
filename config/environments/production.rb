@@ -99,4 +99,5 @@ Rails.application.configure do
     password: Rails.application.credentials.dig(:smtp, :password),
     authentication: "plain"
   }
+  Rails.application.routes.default_url_options = config.action_mailer.default_url_options = {host: Rails.application.credentials.dig(:server_url)}
 end
