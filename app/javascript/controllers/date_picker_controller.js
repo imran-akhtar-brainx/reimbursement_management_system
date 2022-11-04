@@ -5,7 +5,6 @@ export default class extends Controller {
 
     connect() {
         console.log("Hello, Stimulus!", this.element)
-
         let start = moment().subtract(29, 'days');
         let end = moment();
         $('#reportrange').daterangepicker({
@@ -21,4 +20,5 @@ export default class extends Controller {
             }
         });
     }
+
 }
