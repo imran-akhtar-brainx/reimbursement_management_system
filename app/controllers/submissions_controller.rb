@@ -2,7 +2,19 @@ class SubmissionsController < ApplicationController
   before_action :set_form
 
   def index
-    @submissions = current_user.submissions.where(form_id: @form.id)
+    @forms = Form.all
+    @users = User.all
+    @submissions = Submission.all.order(created_at: :desc)
+    @submissions = @submissions.where(user_id: params[:user_id]) if params[:user_id].present?
+    @submissions = @submissions.where(form_id: params[:form_id]) if params[:form_id].present?
+    @submissions = @submissions.where(created_at: Date.strptime(params['reportrange'].split(' - ', 2)[0], "%m/%d/%Y").beginning_of_day..Date.strptime(params['reportrange'].split(' - ', 2)[1], "%m/%d/%Y").end_of_day) if params[:reportrange].present?
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        @xlsx_file = generate_xlsx(@submissions)
+        send_file(@xlsx_file.path)
+      end
+    end
   end
 
   def new
@@ -30,15 +42,6 @@ class SubmissionsController < ApplicationController
     @submissions = @user.submissions.where(form_id: @form.id)
   end
 
-  #TODO: I will improve this function by removing the check statements
-  def filtered
-    @user = User.find(params[:user_id])
-    range = params['reportrange']
-    range = range.split(' - ', 2)
-    @submissions = @user.submissions.where(form_id: @form.id, created_at: Date.strptime(range[0], "%m/%d/%Y").beginning_of_day..Date.strptime(range[1], "%m/%d/%Y").end_of_day)
-    render 'submissions/index'
-  end
-
   def set_form
     @form = Form.find_by(_type: params[:_type].present? ? params[:_type] : "working")
     @forms = Form.all
@@ -62,4 +65,52 @@ class SubmissionsController < ApplicationController
     end
     sum
   end
+
+  def generate_xlsx(submissions)
+
+    file = Tempfile.new(%w[report .xlsx])
+    workbook = WriteXLSX.new(file)
+    worksheet = workbook.add_worksheet
+    data = []
+    data << csv_fields(submissions.first)
+    submissions.each do |submission|
+      data << data_fields(submission)
+    end
+    # submission.data.values.each do |value|
+    #   data << value.values
+    # end
+    worksheet.write_col(0, 0, data)
+    workbook.close
+    file
+  end
+
+
+  def data_fields(submission)
+    fields = []
+    submission.attributes.keys.each do |field|
+      if field == "data"
+        submission.attributes[field].values.first.values.each do |key|
+          fields.push(key)
+        end
+      else
+        fields.push(submission.attributes[field])
+      end
+    end
+    fields
+  end
+
+  def csv_fields(submission)
+    fields = []
+    submission.attributes.keys.each do |field|
+      if field == "data"
+        submission.attributes[field].values.first.keys.each do |key|
+          fields.push(key)
+        end
+      else
+        fields.push(field)
+      end
+    end
+    fields
+  end
+
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     devise_for :users
     root to: "users#index"
   end
-  root to: "submissions#index"
+  root to: "accountants#index"
   devise_for :users
   resources :employees do
     collection do
