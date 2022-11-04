@@ -76,9 +76,6 @@ class SubmissionsController < ApplicationController
     submissions.each do |submission|
       data << data_fields(submission)
     end
-    # submission.data.values.each do |value|
-    #   data << value.values
-    # end
     worksheet.write_col(0, 0, data)
     workbook.close
     file
