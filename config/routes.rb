@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get 'submitted_forms'
       get 'form_submissions'
     end
+    root to: "employees#index"
   end
   resources :managers do
     member do

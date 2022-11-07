@@ -76,6 +76,7 @@ class SubmissionsController < ApplicationController
       data << csv_fields(submission.attributes, "data-fields")
     end
     data << submissions.sum(:total)
+
     worksheet.write_col(0, 0, data)
     workbook.close
     file
