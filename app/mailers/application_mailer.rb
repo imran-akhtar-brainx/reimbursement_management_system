@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "BrainXAddmin@example.com"
+  default from: "imran.akhtar.pmdc@gmail.com"
   layout "mailer"
   def welcome_email
     @user = params[:user]

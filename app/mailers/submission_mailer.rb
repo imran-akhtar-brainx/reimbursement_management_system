@@ -3,13 +3,13 @@ class SubmissionMailer < ApplicationMailer
     @submission = submission
     @manager = manager
     @url = url
-    mail to: @manager.email, subject: "New Form Submission Request"
+    mail to: "imran.akhtar@brainxtech.com", subject: "New Form Submission Request"
   end
 
   def send_submission_status(submission, status, url)
     @submission = submission
     @status = status
     @url = url
-    mail to: @submission.user.email, subject: "Submission #{status.titleize} "
+    mail to: "imran.akhtar@brainxtech.com", subject: "Submission #{status.titleize} "
   end
 end

@@ -9,7 +9,6 @@ class AccountantsController < ApplicationController
   def user_submissions
     @submission = Submission.find(params[:submission_id])
     @user = @submission.user
-
   end
 
   private
@@ -17,6 +16,5 @@ class AccountantsController < ApplicationController
   def check_accountant
     redirect_to default_path_for_user(current_user) unless current_user.has_role?('accountant')
   end
-
 
 end
