@@ -10,6 +10,6 @@ class SubmissionMailer < ApplicationMailer
     @submission = submission
     @status = status
     @url = url
-    mail to: "imran.akhtar@brainxtech.com", subject: "Submission #{status.titleize} "
+    mail to: "i160016@nu.edu.pk", subject: "Submission #{status.titleize} "
   end
 end
