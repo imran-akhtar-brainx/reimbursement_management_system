@@ -2,12 +2,11 @@ class SubmissionsController < ApplicationController
   before_action :set_form
 
   def index
-    @forms = Form.all
-    @users = User.all
-    @submissions = Submission.all.order(created_at: :desc)
+    @submissions = current_user.has_role?('accountant') ? Submission.all.order(created_at: :desc) : current_user.submissions.all
     @submissions = @submissions.where(user_id: params[:user_id]) if params[:user_id].present?
     @submissions = @submissions.where(form_id: params[:form_id]) if params[:form_id].present?
     @submissions = @submissions.where(created_at: Date.strptime(params['reportrange'].split(' - ', 2)[0], "%m/%d/%Y").beginning_of_day..Date.strptime(params['reportrange'].split(' - ', 2)[1], "%m/%d/%Y").end_of_day) if params[:reportrange].present?
+    @submissions = @submissions.order(created_at: :desc)
     respond_to do |format|
       format.html
       format.xlsx do
@@ -25,6 +24,8 @@ class SubmissionsController < ApplicationController
     @submission.status = "pending" if (@form._type == "working")
     @submission.total = submission_total(@submission)
     if @submission.save!
+      SubmissionMailer.send_submission_link(@submission, current_user.manager, Rails.application.routes.url_helpers.submission_url(@submission.id)
+      ).deliver_now if @form._type == "working" && current_user.manager.present?
       flash.notice = 'Submission was successfully created.'
       redirect_to submissions_path
     else
@@ -43,8 +44,7 @@ class SubmissionsController < ApplicationController
   end
 
   def set_form
-    @form = Form.find_by(_type: params[:_type].present? ? params[:_type] : "working")
-    @forms = Form.all
+    @form = Form.find(params[:form_id].present? ? params[:form_id] : Form.find_by(_type: "working").id)
   end
 
   def pending_submissions
@@ -59,7 +59,6 @@ class SubmissionsController < ApplicationController
 
   def submission_total(submission)
     sum = 0
-    submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
     submission.data.values.each do |key, value|
       sum += (key['amount'].to_i)
     end
@@ -67,47 +66,39 @@ class SubmissionsController < ApplicationController
   end
 
   def generate_xlsx(submissions)
-
     file = Tempfile.new(%w[report .xlsx])
     workbook = WriteXLSX.new(file)
     worksheet = workbook.add_worksheet
     data = []
-    data << csv_fields(submissions.first)
+    data << csv_fields(submissions.first.attributes, "header")
+
     submissions.each do |submission|
-      data << data_fields(submission)
+      data << csv_fields(submission.attributes, "data-fields")
     end
-    # submission.data.values.each do |value|
-    #   data << value.values
-    # end
+    data << submissions.sum(:total)
     worksheet.write_col(0, 0, data)
     workbook.close
     file
   end
 
-
-  def data_fields(submission)
+  def csv_fields(submission, type)
     fields = []
-    submission.attributes.keys.each do |field|
+    submission['data'] = submission['data'].except("name_of_patient", "relationship_with_employee", "project_name")
+    submission.keys.each do |field|
       if field == "data"
-        submission.attributes[field].values.first.values.each do |key|
-          fields.push(key)
+        submission[field].values.first.keys.each do |key|
+          if type == "header"
+            fields.push(key.titleize)
+          else
+            fields.push(submission[field].values.first[key])
+          end
         end
       else
-        fields.push(submission.attributes[field])
-      end
-    end
-    fields
-  end
-
-  def csv_fields(submission)
-    fields = []
-    submission.attributes.keys.each do |field|
-      if field == "data"
-        submission.attributes[field].values.first.keys.each do |key|
-          fields.push(key)
+        if type == "header"
+          fields.push(field.titleize)
+        else
+          fields.push(submission[field])
         end
-      else
-        fields.push(field)
       end
     end
     fields

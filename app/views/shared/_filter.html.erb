@@ -1,8 +1,10 @@
 <div class="d-flex justify-content-end mb-5" data-controller="date-picker">
   <%= form_with class: "app-container", url: submissions_path, method: :get do |f| %>
-    <%= f.select(:user_id, options_for_select(@users.map { |user| [user.name, user.id] }, params[:user_id]), include_blank: 'Select User') %>
-    <%= f.select(:form_id, options_for_select(@forms.all.map { |form| [form._type, form.id] }, params[:form_id]), include_blank: 'Select form type') %>
-    <%= f.text_field "reportrange", class: "pull-right", style: "background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 7F0%" do %>
+    <% if current_user.role == "accountant" %>
+      <%= f.select(:user_id, options_for_select(all_employees, params[:user_id]), { include_blank: "Select User" }, { :class => 'select-field' }) %>
+    <% end %>
+    <%= f.select(:form_id, options_for_select(all_forms, params[:form_id]), { include_blank: "Select Form" }, { :class => 'select-field' }) %>
+    <%= f.text_field "reportrange", class: "pull-right select-field" do %>
       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
       <span></span> <b class="caret"></b>
     <% end %>

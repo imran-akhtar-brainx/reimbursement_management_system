@@ -26,6 +26,13 @@ form .row {
     float: left;
 }
 
+.select-field{
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+
 .border-none {
     border: none;
     width: 100%;

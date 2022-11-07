@@ -1,13 +1,6 @@
-<div class="container">
-  <div class="dropdown dropdown-forms">
-    <button class="btn btn-primary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Form Types
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <% @forms.each do |form| %>
-        <li><%= link_to form._type.titleize, new_submission_path(_type: form._type), class: "dropdown-item" %></li>
-      <% end %>
-    </ul>
-    </li>
-  </div>
+<div class="container d-flex justify-content-end mt-3">
+  <%= form_with class: "app-container", url: new_submission_path, method: :get do |f| %>
+    <%= f.select(:form_id, options_for_select(all_forms, params[:form_id]), include_blank: 'Select form type', class: "select-field") %>
+    <span><%= f.submit "Submit" %> </span>
+  <% end %>
 </div>

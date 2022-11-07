@@ -1,9 +1,5 @@
 <% if @active_role == "accountants" %>
-<!--  <div class="d-flex justify-content-end">-->
-<!--    <h4> Total: <%#= @submission.user.total_generator([@submission]) %></h4>-->
-<!--  </div>-->
-
   <div class="d-flex justify-content-center">
-    <%= link_to 'Excel', submissions_path(format: :xlsx, submissions: @submissions), class: "btn btn-primary" %>
+    <%= link_to 'Excel', submissions_path(format: :xlsx, user_id: params[:user_id], form_id: params[:form_id], reportrange: params[:reportrange]), class: "btn btn-primary" %>
   </div>
 <% end %>

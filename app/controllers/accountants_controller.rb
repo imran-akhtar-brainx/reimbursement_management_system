@@ -2,12 +2,6 @@ class AccountantsController < ApplicationController
   # TODO we will add account portal
   before_action :check_accountant
 
-  def index
-    # @form = Form.find_by(_type: params[:_type].present? ? params[:_type] : "working")
-    @forms = Form.all
-    @users = User.all
-    @submissions = Submission.all
-  end
   def employees
     @users = User.joins(:roles).where.not('roles._type' => 'admin').order(:id).distinct
   end

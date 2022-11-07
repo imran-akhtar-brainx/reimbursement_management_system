@@ -36,9 +36,4 @@
     <%= link_to "My Submissions", submissions_path, class: "btn btn-primary header-requested-button" %>
     <%= link_to "Requested Submissions", applicants_managers_path, class: "btn btn-primary header-submission-button" %>
   <% end %>
-
-  <% if @active_role == "accountants" %>
-    <%= link_to "My Submissions", submissions_path, class: "btn btn-primary header-requested-button" %>
-    <%= link_to "Requested Submissions", employees_accountants_path, class: "btn btn-primary header-submission-button" %>
-  <% end %>
 </nav>
