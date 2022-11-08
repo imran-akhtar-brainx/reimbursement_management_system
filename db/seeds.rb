@@ -6,8 +6,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.create(email: :"imran.akhtar@mailinator.com", password: :"qwerty", emp_id: :"0137", name: :"Imran Akhtae", phone: 03340053, department: :"Ror")
-User.create(email: :"soban.akbar@mailinator.com", password: :"qwerty", emp_id: :"0222", name: :"Soban Akbar", phone: 03340053, department: :"Accounts")
 User.create(email: :"tahir@mailinator.com", password: :"qwerty", emp_id: :"01131", name: :"Tahir", phone: 03340053, department: :"Ror")
+User.create(email: :"soban.akbar@mailinator.com", password: :"qwerty", emp_id: :"0222", name: :"Soban Akbar", phone: 03340053, department: :"Accounts")
 User.create(email: :"soban.akram@mailinator.com", password: :"qwerty", emp_id: :"01131", name: :"Soban Akrm", phone: 03340053, department: :"Ror")
 
 Role.create(_type: :software_engineer , medical_allowance: 1500 , travel_allowance: 1000 , fitness_allowance: 32330, dinner_allowance: 3000)
@@ -16,9 +16,9 @@ Role.create(_type: :admin , medical_allowance: 15000 , travel_allowance: 1000 , 
 Role.create(_type: :accountant , medical_allowance: 15000 , travel_allowance: 1000 , fitness_allowance: 32330, dinner_allowance: 3000)
 
 
-Form.create(_type: :"medical", data: {consultant: "Dr.imran", patient: "umar", description: "Throat infection", fees: "2000", total: "2000"})
+Form.create(_type: :"medical", data: {name_of_patient: "", relationship_with_employee: "", description: "", amount: ""})
 Form.create(_type: :"working", data: {"reporting_manager":"", date:"" ,day:"", reason_of_working:"", nature_of_holiday:"",amount:""})
-Form.create(_type: :"expense", data: {project_name: "..", details: "", amount: ""})
+Form.create(_type: :"expense", data: {project_name: "", details: "", amount: ""})
 Form.create(_type: :"general", data: {description: "", amount: ""})
 
 Submission.create()

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "imran.akhtar.pmdc@gmail.com"
+  default from: "admin_brainx@mailinator.com"
   layout "mailer"
 end

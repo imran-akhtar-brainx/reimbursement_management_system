@@ -1,6 +1,6 @@
 <div class="container d-flex justify-content-end mt-3">
   <%= form_with class: "app-container", url: new_submission_path, method: :get do |f| %>
-    <%= f.select(:form_id, options_for_select(all_forms, params[:form_id]), include_blank: 'Select form type', class: "select-field") %>
+    <%= f.select(:form_id, options_for_select(all_forms, params[:form_id]), {include_blank: 'Select form type'}, {class: "select-field"}) %>
     <span><%= f.submit "Submit" %> </span>
   <% end %>
 </div>
