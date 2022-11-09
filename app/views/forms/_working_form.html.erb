@@ -90,13 +90,14 @@
               <td><%= form.select("data[#{counter}][#{key}]", options_for_select([['Full Day', "Full Day"], ['Half Day', 'Half Day']]), {include_blank: 'Select Day type'}, {class: "border-none", required: true}) %></td>
             <% else %>
               <td>
-                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", required: true %></td>
+                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", onfocusout: "myFunction()", required: true %></td>
             <% end %>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
+    <span id="myspan"></span>
     <div class="d-flex justify-content-end" data-controller="table" data-table-row-value="<%= @form.data.keys %>" data-table-counter-value="<%= counter %>" data-table-type-value="<%= @form._type %>">
       <button type="button" class="btn btn-outline-primary" data-action="click->table#createElement" data-target="table.form">Add
         Form Row

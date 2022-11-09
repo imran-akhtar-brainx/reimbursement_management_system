@@ -6,11 +6,13 @@ class SubmissionsController < ApplicationController
     @submissions = @submissions.where(user_id: params[:user_id]) if params[:user_id].present?
     @submissions = @submissions.where(form_id: params[:form_id]) if params[:form_id].present?
     @submissions = @submissions.where(created_at: Date.strptime(params['reportrange'].split(' - ', 2)[0], "%m/%d/%Y").beginning_of_day..Date.strptime(params['reportrange'].split(' - ', 2)[1], "%m/%d/%Y").end_of_day) if params[:reportrange].present?
-    @pagy, @submissions = pagy(@submissions.order(created_at: :desc), items: 5)
+    @submissions = @submissions.order(created_at: :desc)
     respond_to do |format|
-      format.html
+      format.html do
+        @pagy, @submissions = pagy(@submissions, items: 5)
+      end
       format.xlsx do
-        @xlsx_file = generate_xlsx(@submissions)
+        @xlsx_file = generate_xlsx
         send_file(@xlsx_file.path)
       end
     end
@@ -65,56 +67,52 @@ class SubmissionsController < ApplicationController
     sum
   end
 
-  def generate_xlsx(submissions)
+  def generate_xlsx
     file = Tempfile.new(%w[report .xlsx])
     workbook = WriteXLSX.new(file)
     worksheet = workbook.add_worksheet
-    data = []
-    data << csv_fields(submissions.first.attributes, "header")
-
-    submissions.each do |submission|
-      data << csv_fields(submission.attributes, "data-fields")
+    @data = []
+    @data << ["submission Id", "Employee Id", "Employee Name", "Form Type", "Date", "Day", "Reason Of Working", "Nature Of Holiday", "Name Of Patient", "Relationship With Employee", "Project Name", "Description", "Amount", "Created At", "Updated At", "Status", "Approved By"]
+    @submissions.each do |submission|
+      csv_fields(submission)
     end
-    data << ["Grad Total: ", submissions.sum(:total).to_s]
-
-    worksheet.write_col(0, 0, data)
+    worksheet.write_col(0, 0, @data)
     workbook.close
     file
   end
 
-  def csv_fields(submission, type)
-    fields = []
-    if type == "header"
-      fields.push("User Name")
-      fields.push("Form Type")
-    else
-      fields.push(User.find(submission['user_id']).name.titleize)
-      fields.push(Form.find(submission['form_id'])._type.titleize)
-    end
-    submission['data'] = submission['data'].except("name_of_patient", "relationship_with_employee", "project_name")
-    submission.keys.each do |field|
-      if field == "data"
-        if type == "header"
-          submission[field].first[1].keys.each do |key|
-              fields.push(key.titleize)
-          end
-        else
-          submission[field].each do |hash|
-            debugger
-            hash[1].values.each do |value|
-              fields.push(value)
-            end
-          end
-        end
-
-      end
-      if type == "header"
-        fields.push(field.titleize)
+  def csv_fields(submission)
+    fields = ["date", "day", "reason_of_working", "nature_of_holiday", "name_of_patient", "relationship_with_employee", "project_name", "description", "amount"]
+    user = submission.user
+    form = submission.form._type
+    form_row_fields = {}
+    form_single_fields = {}
+    submission['data'].each do |key, values|
+      if values.is_a? String
+        form_single_fields["#{key}"] = values
       else
-        fields.push(submission[field])
+        form_row_fields["#{key}"] = values
       end
     end
-    fields
+    form_row_fields.each do |key, values|
+      arr = []
+      arr << submission.id
+      arr << user.emp_id
+      arr << user.name
+      arr << form
+      fields.each do |field|
+        if values[field].present?
+          arr << values[field]
+        else
+          arr << form_single_fields[field]
+        end
+      end
+      arr << submission.created_at
+      arr << submission.updated_at
+      arr << submission.status
+      arr << submission.approved_by
+      @data << arr
+    end
   end
 
 end

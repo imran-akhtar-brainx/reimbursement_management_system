@@ -43,5 +43,15 @@ export default class extends Controller {
             element.appendChild(tableData);
         })
         document.getElementById(`${this.typeValue}` + "-table").appendChild(element);
+        this.addValue()
+    }
+    addValue(){
+        let sum = 0;
+        let add = document.querySelectorAll('input[type=number]')
+        for(let i = 0; i<add.length; i++){
+            console.log(add[i].value)
+            sum += add[i].value
+        }
+        document.getElementById("myspan").textContent=sum;
     }
 }
