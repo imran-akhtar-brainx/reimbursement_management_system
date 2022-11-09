@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end mb-5" data-controller="date-picker">
+<div class="d-flex justify-content-end " data-controller="date-picker">
   <%= form_with class: "app-container", url: submissions_path, method: :get do |f| %>
     <% if current_user.role == "accountant" %>
       <%= f.select(:user_id, options_for_select(all_employees, params[:user_id]), { include_blank: "Select User" }, { :class => 'select-field' }) %>

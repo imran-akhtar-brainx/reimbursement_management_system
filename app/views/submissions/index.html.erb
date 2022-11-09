@@ -9,9 +9,13 @@
   <div>
     <h2 class="d-flex justify-content-center"><%= @form._type.titleize %></h2>
     <%= render 'shared/filter' %>
+    <%= render 'shared/excel' %>
     <%= render 'shared/forms-header' %>
     <%= render 'submissions/table' %>
-    <%= render 'shared/excel' %>
+    <div class="d-flex justify-content-end">
+      <p> <span style="font-weight:bold" >Grand total: </span> <%= @submissions.sum(:total)  %></p>
+    </div>
   </div>
+  <%== pagy_nav(@pagy) %>
 </div>
 

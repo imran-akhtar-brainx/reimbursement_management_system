@@ -1,5 +1,7 @@
+<div class="mb-5">
 <% if @active_role == "accountants" %>
-  <div class="d-flex justify-content-center">
-    <%= link_to 'Excel', submissions_path(format: :xlsx, user_id: params[:user_id], form_id: params[:form_id], reportrange: params[:reportrange]), class: "btn btn-primary" %>
+  <div class="d-flex justify-content-end">
+    <%= link_to 'Excel', submissions_path(format: :xlsx, user_id: params[:user_id], form_id: params[:form_id], reportrange: params[:reportrange]), class: "btn bg-green" %>
   </div>
 <% end %>
+</div>

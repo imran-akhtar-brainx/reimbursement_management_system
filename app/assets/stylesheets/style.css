@@ -87,3 +87,12 @@ input[type=number] {
     width: 200px;
     height: 200px;
 }
+
+.page {
+    border: 1px solid gray;
+    padding: 3px 5px;
+}
+
+.bg-green {
+    background-color: greenyellow !important;
+}

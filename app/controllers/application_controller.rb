@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  include Pagy::Backend
   before_action :authenticate_user!, :set_user_role
 
   def after_sign_in_path_for(resource)

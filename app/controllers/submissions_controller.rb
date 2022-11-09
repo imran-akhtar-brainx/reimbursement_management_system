@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
     @submissions = @submissions.where(user_id: params[:user_id]) if params[:user_id].present?
     @submissions = @submissions.where(form_id: params[:form_id]) if params[:form_id].present?
     @submissions = @submissions.where(created_at: Date.strptime(params['reportrange'].split(' - ', 2)[0], "%m/%d/%Y").beginning_of_day..Date.strptime(params['reportrange'].split(' - ', 2)[1], "%m/%d/%Y").end_of_day) if params[:reportrange].present?
-    @submissions = @submissions.order(created_at: :desc)
+    @pagy, @submissions = pagy(@submissions.order(created_at: :desc), items: 5)
     respond_to do |format|
       format.html
       format.xlsx do
@@ -75,7 +75,7 @@ class SubmissionsController < ApplicationController
     submissions.each do |submission|
       data << csv_fields(submission.attributes, "data-fields")
     end
-    data << submissions.sum(:total)
+    data << ["Grad Total: ", submissions.sum(:total).to_s]
 
     worksheet.write_col(0, 0, data)
     workbook.close
@@ -84,25 +84,40 @@ class SubmissionsController < ApplicationController
 
   def csv_fields(submission, type)
     fields = []
+    if type == "header"
+      fields.push("User Name")
+      fields.push("Form Type")
+    else
+      fields.push(User.find(submission['user_id']).name.titleize)
+      fields.push(Form.find(submission['form_id'])._type.titleize)
+    end
     submission['data'] = submission['data'].except("name_of_patient", "relationship_with_employee", "project_name")
     submission.keys.each do |field|
       if field == "data"
-        submission[field].values.first.keys.each do |key|
-          if type == "header"
-            fields.push(key.titleize)
-          else
-            fields.push(submission[field].values.first[key])
+        if type == "header"
+          submission[field].first[1].keys.each do |key|
+              fields.push(key.titleize)
+          end
+        else
+          submission[field].each do |hash|
+            debugger
+            hash[1].values.each do |value|
+              fields.push(value)
+            end
           end
         end
+
+      end
+      if type == "header"
+        fields.push(field.titleize)
       else
-        if type == "header"
-          fields.push(field.titleize)
-        else
-          fields.push(submission[field])
-        end
+        fields.push(submission[field])
       end
     end
     fields
   end
 
 end
+
+
+
