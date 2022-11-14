@@ -96,3 +96,13 @@ input[type=number] {
 .bg-green {
     background-color: greenyellow !important;
 }
+
+.nav-logo{
+    width: 25%;
+    height: auto;
+}
+
+.nav-img {
+    height: 72px;
+    width: 5%;
+}
