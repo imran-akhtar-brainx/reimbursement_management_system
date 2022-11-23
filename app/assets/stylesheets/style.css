@@ -106,3 +106,7 @@ input[type=number] {
     height: 72px;
     width: 5%;
 }
+
+.profile{
+    margin-left: auto;
+}
