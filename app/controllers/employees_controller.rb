@@ -1,7 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :check_employee
 
-
   private
 
   def check_employee

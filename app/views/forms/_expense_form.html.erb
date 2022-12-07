@@ -67,7 +67,7 @@
       <div class="col-6">
         <span>Project Name :</span>
         <span class="form-header"><%= form.text_field "data[project_name]", required: true %></span>
-        <%= form.hidden_field :_type, value: @form._type %>
+        <%= form.hidden_field :form_id, value: @form.id %>
       </div>
     </div>
 

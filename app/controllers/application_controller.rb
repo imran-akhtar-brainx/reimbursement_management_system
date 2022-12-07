@@ -1,17 +1,14 @@
 class ApplicationController < ActionController::Base
-
+  include Pagy::Backend
   before_action :authenticate_user!, :set_user_role
 
-  def after_sign_in_path(resource)
+  def after_sign_in_path_for(resource)
     default_path_for_user(resource)
   end
 
   def default_path_for_user(resource)
-    debugger
     if resource.has_role?('admin')
       admin_root_path
-    elsif resource.has_role?('accountant')
-      accountants_path
     else
       submissions_path
     end

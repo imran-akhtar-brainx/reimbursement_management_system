@@ -58,7 +58,7 @@
           </div>
           <div class="col-8">
             <span class="form-header"><%= current_user.department %></span>
-            <%= form.hidden_field :_type, value: @form._type %>
+            <%= form.hidden_field :form_id, value: @form.id %>
           </div>
         </div>
       </div>

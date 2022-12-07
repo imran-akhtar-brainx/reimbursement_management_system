@@ -42,7 +42,7 @@ gem 'bootstrap', '~> 5.2.2'
 
 gem 'jquery-rails'
 
-# gem 'administrate-bootstrap-theme', '~> 1.0'
+gem 'pagy'
 
 gem 'administrate-bootstrap-theme', '~> 1.0', '>= 1.0.6'
 

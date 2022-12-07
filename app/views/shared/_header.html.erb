@@ -1,44 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon">home</span>
-  </button>
-  <div class="dropdown mx-2">
-    <i id="dropdownMenuButton1" class="dropdown-toggle fa-solid fa-bars icon" data-bs-toggle="dropdown" aria-expanded="false"></i>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li>
-        <div class="dropdown-item">
-          <%= link_to "Home", root_path, :class => "btn" %>
-        </div>
-      </li>
+  <div class="container-fluid" >
+    <div style="height: 35px;">
+      <%= image_tag "site-logo-01.png", class: "w-100 h-100 nav-img float-start rounded-3" %>
+    </div>
+    <span class="badge bg-dark fa-1x"> Reimbursement Management </span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, :class => "nav-link text-white fa-1x" %>
+        </li>
+        <% if user_signed_in? %>
+          <% if @active_role == "managers" %>
+            <li class="nav-item">
+              <%= link_to "My Submissions", submissions_path, :class => "nav-link text-white" %>
+            </li>
+            <li>
+              <%= link_to "Requested Submissions", applicants_managers_path, :class => "nav-link text-white" %>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign In", new_user_session_path, :class => "nav-link text-white" %>
+          </li>
+        <% end %>
+      </ul>
       <% if user_signed_in? %>
-        <li>
-          <div class="dropdown-item">
-            <%= link_to "Edit Profile", edit_user_registration_path, :class => "btn" %>
-          </div>
-        </li>
-
-        <li>
-          <div class="dropdown-item">
-            <%= link_to 'Log Out', destroy_user_session_path, :class => "btn" %>
-          </div>
-        </li>
-
-      <% else %>
-        <li>
-          <div class="dropdown-item">
-            <%= link_to "Sign In", new_user_session_path, :class => "btn" %>
-          </div>
-        </li>
+        <div class="btn-group profile">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.name.titleize %>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><%= link_to "Edit Profile", edit_user_registration_path, :class => "dropdown-item" %> </li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, :class => "dropdown-item" %></li>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+    </div>
   </div>
-  <% if @active_role == "managers" %>
-    <%= link_to "My Submissions", submissions_path, class: "btn btn-primary header-requested-button" %>
-    <%= link_to "Requested Submissions", applicants_managers_path, class: "btn btn-primary header-submission-button" %>
-  <% end %>
-
-  <% if @active_role == "accountants" %>
-    <%= link_to "My Submissions", submissions_path, class: "btn btn-primary header-requested-button" %>
-    <%= link_to "Requested Submissions", employees_accountants_path, class: "btn btn-primary header-submission-button" %>
-  <% end %>
 </nav>

@@ -2,16 +2,17 @@ class SubmissionsController < ApplicationController
   before_action :set_form
 
   def index
-    @forms = Form.all
-    @users = User.all
-    @submissions = Submission.all.order(created_at: :desc)
+    @submissions = current_user.has_role?('accountant') ? Submission.all.order(created_at: :desc) : current_user.submissions.all
     @submissions = @submissions.where(user_id: params[:user_id]) if params[:user_id].present?
     @submissions = @submissions.where(form_id: params[:form_id]) if params[:form_id].present?
     @submissions = @submissions.where(created_at: Date.strptime(params['reportrange'].split(' - ', 2)[0], "%m/%d/%Y").beginning_of_day..Date.strptime(params['reportrange'].split(' - ', 2)[1], "%m/%d/%Y").end_of_day) if params[:reportrange].present?
+    @submissions = @submissions.order(created_at: :desc)
     respond_to do |format|
-      format.html
+      format.html do
+        @pagy, @submissions = pagy(@submissions, items: 5)
+      end
       format.xlsx do
-        @xlsx_file = generate_xlsx(@submissions)
+        @xlsx_file = generate_xlsx
         send_file(@xlsx_file.path)
       end
     end
@@ -25,6 +26,8 @@ class SubmissionsController < ApplicationController
     @submission.status = "pending" if (@form._type == "working")
     @submission.total = submission_total(@submission)
     if @submission.save!
+      SubmissionMailer.send_submission_link(@submission, current_user.manager, Rails.application.routes.url_helpers.submission_url(@submission.id)
+      ).deliver_now if @form._type == "working" && current_user.manager.present?
       flash.notice = 'Submission was successfully created.'
       redirect_to submissions_path
     else
@@ -43,8 +46,7 @@ class SubmissionsController < ApplicationController
   end
 
   def set_form
-    @form = Form.find_by(_type: params[:_type].present? ? params[:_type] : "working")
-    @forms = Form.all
+    @form = Form.find(params[:form_id].present? ? params[:form_id] : Form.find_by(_type: "working").id)
   end
 
   def pending_submissions
@@ -59,58 +61,61 @@ class SubmissionsController < ApplicationController
 
   def submission_total(submission)
     sum = 0
-    submission.data = submission.data.except('name_of_patient', 'relationship_with_employee', 'reporting_manager', 'name_of_patient', 'relationship_with_employee', 'project_name')
     submission.data.values.each do |key, value|
       sum += (key['amount'].to_i)
     end
     sum
   end
 
-  def generate_xlsx(submissions)
-
+  def generate_xlsx
     file = Tempfile.new(%w[report .xlsx])
     workbook = WriteXLSX.new(file)
     worksheet = workbook.add_worksheet
-    data = []
-    data << csv_fields(submissions.first)
-    submissions.each do |submission|
-      data << data_fields(submission)
+    @data = []
+    @data << ["submission Id", "Employee Id", "Employee Name", "Form Type", "Date", "Day", "Reason Of Working", "Nature Of Holiday", "Name Of Patient", "Relationship With Employee", "Project Name", "Description", "Amount", "Created At", "Updated At", "Status", "Approved By"]
+    @submissions.each do |submission|
+      csv_fields(submission)
     end
-    # submission.data.values.each do |value|
-    #   data << value.values
-    # end
-    worksheet.write_col(0, 0, data)
+    worksheet.write_col(0, 0, @data)
     workbook.close
     file
   end
 
-
-  def data_fields(submission)
-    fields = []
-    submission.attributes.keys.each do |field|
-      if field == "data"
-        submission.attributes[field].values.first.values.each do |key|
-          fields.push(key)
-        end
-      else
-        fields.push(submission.attributes[field])
-      end
-    end
-    fields
-  end
-
   def csv_fields(submission)
-    fields = []
-    submission.attributes.keys.each do |field|
-      if field == "data"
-        submission.attributes[field].values.first.keys.each do |key|
-          fields.push(key)
-        end
+    fields = ["date", "day", "reason_of_working", "nature_of_holiday", "name_of_patient", "relationship_with_employee", "project_name", "description", "amount"]
+    user = submission.user
+    form = submission.form._type
+    form_row_fields = {}
+    form_single_fields = {}
+    submission['data'].each do |key, values|
+      if values.is_a? String
+        form_single_fields["#{key}"] = values
       else
-        fields.push(field)
+        form_row_fields["#{key}"] = values
       end
     end
-    fields
+    form_row_fields.each do |key, values|
+      arr = []
+      arr << submission.id
+      arr << user.emp_id
+      arr << user.name
+      arr << form
+      fields.each do |field|
+        if values[field].present?
+          arr << values[field]
+        else
+          arr << form_single_fields[field]
+        end
+      end
+      arr << submission.created_at
+      arr << submission.updated_at
+      arr << submission.status
+      arr << submission.approved_by
+      @data << arr
+    end
   end
 
 end
+
+
+

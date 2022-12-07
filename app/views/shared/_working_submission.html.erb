@@ -1,8 +1,8 @@
 <div class="container mt-5 app-container">
   <% if @active_role == "managers" && @submission.user.role != "project_manager" %>
     <div class="d-flex justify-content-end">
-      <span class="mx-3"><%= link_to "Approve", set_status_manager_path(user_id: @submission.user.id, status: "approved", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-primary" %></span>
-      <span><%= link_to "Reject", set_status_manager_path(user_id: @submission.user.id, status: "rejected", submission_id: @submission.id), data: { turbo_method: "post" }, class: "btn btn-danger" %></span>
+      <span class="mx-3"><%= link_to "Approve", set_status_manager_path(user_id: @submission.user.id, status: "approved", submission_id: @submission.id), class: "btn btn-primary" %></span>
+      <span><%= link_to "Reject", set_status_manager_path(user_id: @submission.user.id, status: "rejected", submission_id: @submission.id), class: "btn btn-danger" %></span>
     </div>
   <% end %>
   <div class="row">
@@ -82,5 +82,4 @@
     <% end %>
     </tbody>
   </table>
-  <%= render 'shared/excel' %>
 </div>

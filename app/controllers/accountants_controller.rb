@@ -2,12 +2,6 @@ class AccountantsController < ApplicationController
   # TODO we will add account portal
   before_action :check_accountant
 
-  def index
-    # @form = Form.find_by(_type: params[:_type].present? ? params[:_type] : "working")
-    @forms = Form.all
-    @users = User.all
-    @submissions = Submission.all
-  end
   def employees
     @users = User.joins(:roles).where.not('roles._type' => 'admin').order(:id).distinct
   end
@@ -15,7 +9,6 @@ class AccountantsController < ApplicationController
   def user_submissions
     @submission = Submission.find(params[:submission_id])
     @user = @submission.user
-
   end
 
   private
@@ -23,6 +16,5 @@ class AccountantsController < ApplicationController
   def check_accountant
     redirect_to default_path_for_user(current_user) unless current_user.has_role?('accountant')
   end
-
 
 end

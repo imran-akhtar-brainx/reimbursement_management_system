@@ -13,6 +13,7 @@ class ManagersController < ApplicationController
   def set_status
     submission = Submission.find(params[:submission_id])
     if submission.update(status: params[:status])
+      SubmissionMailer.send_submission_status(submission, params[:status], Rails.application.routes.url_helpers.submission_url(submission.id)).deliver_now
       flash.notice = 'Submission was successfully updated'
       redirect_to show_request_manager_path(id: params[:user_id])
     else

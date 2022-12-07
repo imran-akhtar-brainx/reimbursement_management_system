@@ -4,7 +4,6 @@ export default class extends Controller {
     static targets = ["range"]
 
     connect() {
-        console.log("Hello, Stimulus!", this.element)
         let start = moment().subtract(29, 'days');
         let end = moment();
         $('#reportrange').daterangepicker({

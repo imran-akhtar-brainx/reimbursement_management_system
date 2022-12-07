@@ -26,6 +26,13 @@ form .row {
     float: left;
 }
 
+.select-field{
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+
 .border-none {
     border: none;
     width: 100%;
@@ -79,4 +86,27 @@ input[type=number] {
 .grid img{
     width: 200px;
     height: 200px;
+}
+
+.page {
+    border: 1px solid gray;
+    padding: 3px 5px;
+}
+
+.bg-green {
+    background-color: greenyellow !important;
+}
+
+.nav-logo{
+    width: 25%;
+    height: auto;
+}
+
+.nav-img {
+    height: 72px;
+    width: 5%;
+}
+
+.profile{
+    margin-left: auto;
 }

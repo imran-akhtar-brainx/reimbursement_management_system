@@ -56,7 +56,7 @@
       </div>
       <div class="col-9">
         <span><%= current_user&.manager&.name %></span>
-        <%= form.hidden_field :_type, value: @form._type %>
+        <%= form.hidden_field :form_id, value: @form.id %>
         <%= form.hidden_field :status, value: 'pending' %>
       </div>
     </div>
@@ -83,13 +83,21 @@
       <tr>
         <% @form.data.each do |key, value| %>
           <% unless ["reporting_manager", "total"].include? key %>
-            <td>
-              <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", required: true %></td>
+            <% if key == 'date' %>
+              <td>
+              <%= form.date_field "data[#{counter}][#{key}]",required: true , class: "border-none", value: form.object.try(:strftime,"%m/%d/%Y") %></td>
+            <% elsif key == 'day'%>
+              <td><%= form.select("data[#{counter}][#{key}]", options_for_select([['Full Day', "Full Day"], ['Half Day', 'Half Day']]), {include_blank: 'Select Day type'}, {class: "border-none", required: true}) %></td>
+            <% else %>
+              <td>
+                <%= form.text_field "data[#{counter}][#{key}]", class: "border-none", type: "#{key == "amount" ? 'number' : 'text'}", onfocusout: "myFunction()", required: true %></td>
+            <% end %>
           <% end %>
         <% end %>
       </tr>
       </tbody>
     </table>
+    <span id="myspan"></span>
     <div class="d-flex justify-content-end" data-controller="table" data-table-row-value="<%= @form.data.keys %>" data-table-counter-value="<%= counter %>" data-table-type-value="<%= @form._type %>">
       <button type="button" class="btn btn-outline-primary" data-action="click->table#createElement" data-target="table.form">Add
         Form Row
